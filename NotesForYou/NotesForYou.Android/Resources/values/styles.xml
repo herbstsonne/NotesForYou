@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <style name="Text" />
+
+  <style name="Text.Loading">
+    <item name="android:textSize">14sp</item>
+    <item name="android:textColor">@android:color/black</item>
+  </style>
+
+  <style name="Text.BlogTitle">
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">@android:color/holo_blue_dark</item>
+  </style>
+
+  <style name="Text.Day">
+    <item name="android:textStyle">italic</item>
+    <item name="android:textColor">@android:color/holo_orange_dark</item>
+  </style>
+  
+  <style name="ShowApp">
+    <item name="android:textSize">12sp</item>
+    <item name="android:textStyle">italic</item>
+    <item name="android:textColor">@android:color/holo_orange_light</item>
+  </style>
+
+</resources>
