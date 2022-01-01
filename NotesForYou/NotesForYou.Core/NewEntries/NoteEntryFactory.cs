@@ -4,7 +4,7 @@ namespace NotesForYou.Core.NewEntries
 {
     public static class NoteEntryFactory
     {
-        public static Note Create(Category category, string headline, string dailyThoughtsText)
+        public static Note Create(int category, string headline, string dailyThoughtsText)
         {
             return new Note()
             {

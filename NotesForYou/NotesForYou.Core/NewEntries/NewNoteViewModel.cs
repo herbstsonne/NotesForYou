@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.NewEntries
@@ -9,7 +10,7 @@ namespace NotesForYou.Core.NewEntries
         private string _headline;
         private string _link;
         private Category _category;
-        private INewEntryDataAccessor _newEntryhandler;
+        private INewNoteDataAccessor _newEntryhandler;
 
         public DateTime Day
         {
@@ -29,7 +30,7 @@ namespace NotesForYou.Core.NewEntries
             set => SetProperty(ref _link, value);
         }
 
-        public Category Category
+        public Category SelectedCategory
         {
             get => _category;
             set => SetProperty(ref _category, value);
@@ -40,7 +41,7 @@ namespace NotesForYou.Core.NewEntries
         
         public NewNoteViewModel()
         {
-            _newEntryhandler = new NewEntryDataAccessor(_noteContext);
+            _newEntryhandler = new NewNoteDataAccessor(_noteContext);
             
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
@@ -51,7 +52,7 @@ namespace NotesForYou.Core.NewEntries
 
         private bool ValidateSave()
         {
-            return _newEntryhandler.Validate(_headline, _link);
+            return _newEntryhandler.Validate(_headline, _link, _category);
         }
 
         private async void OnCancel()
@@ -62,11 +63,10 @@ namespace NotesForYou.Core.NewEntries
 
         private async void OnSave()
         {
-            var note = NoteEntryFactory.Create(Category, Headline, Link);
+            var note = NoteEntryFactory.Create((int)SelectedCategory, Headline, Link);
 
             _newEntryhandler.Save(note);
 
-            // This will pop the current page off the navigation stack
             if(Shell.Current == null)
                 return;
             await Shell.Current.GoToAsync("..");

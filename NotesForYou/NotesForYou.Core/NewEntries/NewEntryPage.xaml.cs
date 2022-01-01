@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace NotesForYou.Core.NewEntries
 {
@@ -10,6 +11,15 @@ namespace NotesForYou.Core.NewEntries
         {
             InitializeComponent();
             BindingContext = new NewNoteViewModel();
+        }
+
+        private void Picker_SelectedIndexChanged(object o, EventArgs e)
+        {
+            var picker = (Picker)o;
+            var context = (NewNoteViewModel)BindingContext;
+            if (picker.SelectedIndex == -1)
+                return;
+            context.SelectedCategory = (Category)picker.SelectedIndex;
         }
     }
 }

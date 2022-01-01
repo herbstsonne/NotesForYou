@@ -3,6 +3,14 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using NotesForYou.Core;
+using Android.Content;
+using JournalToGo.Droid;
+using Java.Interop;
+using Android.Views;
+using NotesForYou.Android;
+using Android.Widget;
+using System;
+using Xamarin.Forms;
 
 namespace NotesForYou.Droid
 {
@@ -21,18 +29,23 @@ namespace NotesForYou.Droid
             LoadApplication(new App());
 
 
-            //this.SetContentView(Resource.Layout.widget_newentry);
-            //EditText edittext = FindViewById<EditText>(Resource.Id.newentrytext);
-            //edittext.KeyPress += (object sender, View.KeyEventArgs e) => {
-            //    e.Handled = false;
-            //    if (e.Event.Action == KeyEventActions.Down && e.KeyCode == Keycode.Enter)
-            //    {
-            //        Toast.MakeText(this, edittext.Text, ToastLength.Short).Show();
-            //        e.Handled = true;
-            //    }
-            //};
+            StartService(new Intent(this, typeof(AppService)));
+
+            //DependencyService.Get<INotificationManager>().SendNotification("test", "hi");
+            //WakefulIntentService.SendWakefulWork(this, typeof(AppService));
+
+            //Intent i = new Intent(this, typeof(AlarmReceiver)).PutExtra("1", true);
+            //PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, i, PendingIntentFlags.UpdateCurrent);
+            //AlarmManager manager = (AlarmManager)GetSystemService(Application.AlarmService);
+
+            //manager.Set(AlarmType.ElapsedRealtimeWakeup, SystemClock.ElapsedRealtime() + 1000, pendingIntent);
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnBackPressed()
+        {
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 

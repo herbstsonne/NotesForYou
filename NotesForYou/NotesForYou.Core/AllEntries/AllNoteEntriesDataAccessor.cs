@@ -16,7 +16,7 @@ namespace NotesForYou.Core.AllEntries
         public List<Note> GetAll(List<Note> entries)
         {
             var items = _context.Note.Where(x => x.Date != null).ToList(); 
-            items.Sort((a, b) => DateTime.Compare(a.Date, b.Date));
+            items.Sort((a, b) => DateTime.Compare((DateTime)a.Date, (DateTime)b.Date));
 
             foreach (var item in items)
             {

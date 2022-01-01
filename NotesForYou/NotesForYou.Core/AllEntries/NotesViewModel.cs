@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using NotesForYou.Core.NewEntries;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.AllEntries
@@ -15,18 +18,24 @@ namespace NotesForYou.Core.AllEntries
         public ObservableCollection<Note> Entries { get; }
         public Command LoadEntriesCommand { get; }
         public Command AddEntryCommand { get; }
+        public Command ClickLinkCommand { get; }
 
         public NotesViewModel()
         {
-            Title = "All shown notes";
+            Title = "Alle bereits angezeigten Nachrichten";
             Entries = new ObservableCollection<Note>();
             LoadEntriesCommand = new Command(() => ExecuteLoadItemsCommand());
+            ClickLinkCommand = new Command<string>(async url => await ExecuteClickLinkCommand(url));
 
             AddEntryCommand = new Command(OnAddItem);
 
             _dataAccessor = new AllNoteEntriesDataAccessor(_noteContext);
         }
-        
+
+        private async Task ExecuteClickLinkCommand(string url)
+        {
+            await Launcher.OpenAsync(new System.Uri(url));
+        }
 
         private void ExecuteLoadItemsCommand()
         {

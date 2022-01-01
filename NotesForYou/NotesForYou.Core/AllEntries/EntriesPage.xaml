@@ -42,14 +42,28 @@
                         SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                        <StackLayout Padding="10" x:DataType="notesForYou:Note">
-                        <Label Text="{Binding Date, StringFormat='{0:dd. MMMM yyyy}'}" 
+                        <StackLayout Padding="10">
+                            <Label x:DataType="notesForYou:Note" Text="{Binding Date, StringFormat='{0:dd. MMMM yyyy}'}" 
                             LineBreakMode="NoWrap" 
                             FontSize="16" />
-                            <Label Text="{Binding Headline}" 
+                            <Label x:DataType="notesForYou:Note" Text="{Binding Headline}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemTextStyle}"
                             FontSize="13" />
+                            <Label x:DataType="notesForYou:Note">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Link}" TextColor="Blue" TextDecorations="Underline">
+                                            <Span.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding ClickLinkCommand, Source={x:Reference EntriesListView}}" 
+                                                                      CommandParameter="{Binding Link}" 
+                                                                      />
+                                            </Span.GestureRecognizers>
+                                        </Span>
+
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                         </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

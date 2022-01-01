@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="NotesForYou.Core.Settings.SettingsPage"
+             Shell.PresentationMode="ModalAnimated"
+             xmlns:local="clr-namespace:NotesForYou.Core.Settings;assembly=NotesForYou.Core">
+    <ContentPage.Content>
+        <StackLayout Spacing="3" Padding="15">
+            <forms:AnimationView
+                x:Name="animationView"
+                Animation="52103-love.json"
+                AnimationSource="AssetOrBundle"
+                RepeatCount="3"
+                RepeatMode="Restart"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand" />
+            <TimePicker x:DataType="local:SettingsViewModel" Time="{Binding ShowTime}" />
+            <StackLayout x:DataType="local:SettingsViewModel" Orientation="Horizontal">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
