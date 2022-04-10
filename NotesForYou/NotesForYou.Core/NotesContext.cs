@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
-using Xamarin.Essentials;
+using NotesForYou.Core.Database;
 
 namespace NotesForYou.Core
 {
@@ -14,7 +14,6 @@ namespace NotesForYou.Core
         {
             try
             {
-                this.Database.Migrate();
                 this.Database.EnsureCreated();
             }
             catch(Exception e)
@@ -25,10 +24,14 @@ namespace NotesForYou.Core
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "notes.db3");
+            string databasePath = DatabaseLocator.RetrieveDb();
 
+            if (!File.Exists(databasePath))
+            {
+                File.Create(databasePath);
+            }
             optionsBuilder
-                .UseSqlite($"Filename={dbPath}");
+                .UseSqlite($"Filename={databasePath}");
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using NotesForYou.Core.ShowTime;
 using System;
 using Xamarin.Forms;
-using Rg.Plugins.Popup.Pages;
-using System.Windows.Input;
-using System.Threading.Tasks;
 
 namespace NotesForYou.Core.Settings
 {

@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              x:Class="NotesForYou.Core.Login.LoginPage"
              xmlns:local="clr-namespace:NotesForYou.Core.Login;assembly=NotesForYou.Core"
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             Routing.Route="LoginPage">
     <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
             <Button x:DataType="local:LoginViewModel" VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>

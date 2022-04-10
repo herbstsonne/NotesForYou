@@ -5,7 +5,9 @@ namespace NotesForYou.Core.AllEntries
 {
     public interface IAllNoteEntriesDataAccessor
     {
-        List<Note> GetAll(List<Note> entries);
-        Note GetLatestNote();
+        Task<List<Note>> GetAll();
+        Task<Note> GetLatestNote();
+        Task<Note> GetRandomNote();
+        void UpdateNote(Note note);
     }
 }

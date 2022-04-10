@@ -1,18 +1,14 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Xamarin.Forms;
-using Android.Provider;
-using Android;
 using NotesForYou.Core;
+using NotesForYou.Core.AllEntries;
+using System.Threading.Tasks;
+using Android;
+using AndroidX.Core.App;
 
 namespace JournalToGo.Droid
 {
@@ -20,11 +16,12 @@ namespace JournalToGo.Droid
     [Obsolete]
     public class AppService : WakefulIntentService
     {
-        private int NOTIFY_ID = 1337;
+        const int NOTIFICATION_ID = 9000;
+
         public AppService() : base("AppService")
         {
-
         }
+
 
         protected override void DoWakefulWork(Intent intent)
         {
@@ -33,33 +30,37 @@ namespace JournalToGo.Droid
 
             //get settings
             //set alarm
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
-                DependencyService.Get<INotificationManager>().SendNotification("test", "hi");
+//            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+//            {
+//                Task.Run(async () =>
+//                {
+//                    var dbContext = new NotesContext();
+//                    DependencyService.RegisterSingleton(dbContext);
+//                    using (var _allEntriesDataAccessor = new AllNoteEntriesDataAccessor(dbContext))
+//                    {
+//                        try
+//                        {
+//                            var note = await _allEntriesDataAccessor.GetRandomNote();
+//                            if (note == null)
+//                            {
+//                                Toast.MakeText(this, "No more new notes available. Add new ones :)", ToastLength.Short).Show();
+//                                return;
+//                            }
 
-                return true; // return true to repeat counting, false to stop timer
-            });
-        }
-
-        [Obsolete]
-        private Notification.Builder BuildNormal(Context context)
-        {
-            Notification.Builder builder = new Notification.Builder(context);
-
-            builder.SetAutoCancel(true)
-                .SetContentTitle("Complete")
-                .SetContentText("Fun")
-                .SetContentIntent(BuildPendingIntent(context, Settings.ActionSecuritySettings))
-                .SetSmallIcon(Resource.Drawable.AlertDarkFrame)
-                .SetTicker("Complete")
-                .AddAction(Resource.Id.Icon, "Play", BuildPendingIntent(context, Settings.ActionSettings));
-
-            return builder;
-        }
-        private PendingIntent BuildPendingIntent(Context context, string action)
-        {
-            Intent i = new Intent(action);
-            return (PendingIntent.GetActivity(context, 0, i, 0));
+//                            DependencyService.Get<INotificationManager>().SendNotification(note.Headline, note.Link);
+//                            _allEntriesDataAccessor.UpdateNote(note);
+//                        }
+//                        catch (Exception e)
+//                        {
+//#if DEBUG
+//                            Console.WriteLine(e.Message);
+//#endif
+//                            Toast.MakeText(this, $"Exception occurred: {e.Message}", ToastLength.Short).Show();
+//                        }
+//                    };
+//                });
+//                return true; // return true to repeat counting, false to stop timer
+//            });
         }
     }
 }

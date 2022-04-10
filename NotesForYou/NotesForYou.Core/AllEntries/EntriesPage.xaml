@@ -6,7 +6,8 @@
              xmlns:notesForYou="clr-namespace:NotesForYou.Core;assembly=NotesForYou.Core"
              x:Class="NotesForYou.Core.AllEntries.EntriesPage"
              Title="{Binding Title}"
-             x:Name="BrowseItemsPage">
+             x:Name="BrowseItemsPage"
+             Routing.Route="EntriesPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Change theme" Clicked="ToolbarItem_OnClicked"/>

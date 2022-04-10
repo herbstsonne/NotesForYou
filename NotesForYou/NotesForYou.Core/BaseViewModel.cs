@@ -12,7 +12,7 @@ namespace NotesForYou.Core
 
         public BaseViewModel()
         {
-            _noteContext = new NotesContext();
+            _noteContext = DependencyService.Resolve<NotesContext>();
         }
 
         bool isBusy = false;

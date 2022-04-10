@@ -4,12 +4,7 @@ using Android.Runtime;
 using Android.OS;
 using NotesForYou.Core;
 using Android.Content;
-using JournalToGo.Droid;
-using Java.Interop;
-using Android.Views;
-using NotesForYou.Android;
-using Android.Widget;
-using System;
+using AndroidX.Core.Content;
 using Xamarin.Forms;
 
 namespace NotesForYou.Droid
@@ -17,28 +12,25 @@ namespace NotesForYou.Droid
     [Activity(Label = "NotesForYou", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        public static Xamarin.Forms.Platform.Android.FormsAppCompatActivity Instance { get; private set; }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             Rg.Plugins.Popup.Popup.Init(this);
 
-            SQLitePCL.Batteries_V2.Init();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
+            Instance = this;
 
-            StartService(new Intent(this, typeof(AppService)));
+            var notificationIntent = new Intent(this, typeof(NotificationIntentService));
 
-            //DependencyService.Get<INotificationManager>().SendNotification("test", "hi");
-            //WakefulIntentService.SendWakefulWork(this, typeof(AppService));
+            StartService(notificationIntent);
 
-            //Intent i = new Intent(this, typeof(AlarmReceiver)).PutExtra("1", true);
-            //PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, i, PendingIntentFlags.UpdateCurrent);
-            //AlarmManager manager = (AlarmManager)GetSystemService(Application.AlarmService);
-
-            //manager.Set(AlarmType.ElapsedRealtimeWakeup, SystemClock.ElapsedRealtime() + 1000, pendingIntent);
+            DependencyService.Get<IStartService>().StartForegroundService();
         }
         public override void OnBackPressed()
         {

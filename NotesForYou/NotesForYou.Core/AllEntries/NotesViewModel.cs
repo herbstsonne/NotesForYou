@@ -24,12 +24,14 @@ namespace NotesForYou.Core.AllEntries
         {
             Title = "Alle bereits angezeigten Nachrichten";
             Entries = new ObservableCollection<Note>();
-            LoadEntriesCommand = new Command(() => ExecuteLoadItemsCommand());
+            LoadEntriesCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ClickLinkCommand = new Command<string>(async url => await ExecuteClickLinkCommand(url));
 
             AddEntryCommand = new Command(OnAddItem);
 
-            _dataAccessor = new AllNoteEntriesDataAccessor(_noteContext);
+            var contentRetriever = DependencyService.Resolve<INotificationContentRetriever>();
+
+            _dataAccessor = contentRetriever.DataAccessor;
         }
 
         private async Task ExecuteClickLinkCommand(string url)
@@ -37,14 +39,14 @@ namespace NotesForYou.Core.AllEntries
             await Launcher.OpenAsync(new System.Uri(url));
         }
 
-        private void ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
             try
             {
                 Entries.Clear();
-                var currentEntries = _dataAccessor.GetAll(new List<Note>());
+                var currentEntries = await _dataAccessor.GetAll();
                 foreach (var entry in currentEntries)
                 {
                     Entries.Add(entry);

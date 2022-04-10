@@ -1,4 +1,5 @@
 using System;
+using Xamarin.Forms;
 
 namespace NotesForYou.Core.NewEntries
 {
@@ -6,9 +7,9 @@ namespace NotesForYou.Core.NewEntries
     {
         private readonly NotesContext _context;
 
-        public NewNoteDataAccessor(NotesContext context)
+        public NewNoteDataAccessor()
         {
-            _context = context;
+            _context = DependencyService.Resolve<NotesContext>();
         }
 
         public bool Validate(string headline, string link, Category category)

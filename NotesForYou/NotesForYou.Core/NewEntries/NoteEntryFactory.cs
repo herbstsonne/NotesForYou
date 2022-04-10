@@ -8,7 +8,6 @@ namespace NotesForYou.Core.NewEntries
         {
             return new Note()
             {
-                Id = Guid.NewGuid(),
                 Headline = headline,
                 Link = dailyThoughtsText,
                 Category = category

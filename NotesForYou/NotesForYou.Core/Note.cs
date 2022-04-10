@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotesForYou.Core
 {
     public class Note
     {
-        public Guid Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         public string Headline { get; set; }
         public string Link { get; set; }
         public int Category { get; set; }

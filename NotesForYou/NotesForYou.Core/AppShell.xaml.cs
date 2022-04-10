@@ -1,5 +1,6 @@
 ﻿using System;
 using NotesForYou.Core.AllEntries;
+using NotesForYou.Core.Login;
 using NotesForYou.Core.NewEntries;
 using NotesForYou.Core.Settings;
 using Xamarin.Forms;
@@ -15,6 +16,7 @@ namespace NotesForYou.Core
             InitializeComponent();
             Routing.RegisterRoute(nameof(EntriesPage), typeof(EntriesPage));
             Routing.RegisterRoute(nameof(NewEntryPage), typeof(NewEntryPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
 
             _notificationManager = DependencyService.Get<INotificationManager>();
             _notificationManager.NotificationReceived += (sender, eventArgs) =>

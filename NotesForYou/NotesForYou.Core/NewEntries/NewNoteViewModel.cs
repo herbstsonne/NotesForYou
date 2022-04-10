@@ -41,7 +41,7 @@ namespace NotesForYou.Core.NewEntries
         
         public NewNoteViewModel()
         {
-            _newEntryhandler = new NewNoteDataAccessor(_noteContext);
+            _newEntryhandler = new NewNoteDataAccessor();
             
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
