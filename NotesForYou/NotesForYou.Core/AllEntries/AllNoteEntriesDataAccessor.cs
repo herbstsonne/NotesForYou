@@ -44,6 +44,7 @@ namespace NotesForYou.Core.AllEntries
         {
             note.Date = DateTime.Now;
             _context.Note.Update(note);
+            _context.SaveChangesAsync();
         }
         
         public void Dispose()

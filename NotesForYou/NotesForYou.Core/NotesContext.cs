@@ -26,10 +26,6 @@ namespace NotesForYou.Core
         {
             string databasePath = DatabaseLocator.RetrieveDb();
 
-            if (!File.Exists(databasePath))
-            {
-                File.Create(databasePath);
-            }
             optionsBuilder
                 .UseSqlite($"Filename={databasePath}");
         }
