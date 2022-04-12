@@ -4,8 +4,6 @@ using Android.Runtime;
 using Android.OS;
 using NotesForYou.Core;
 using Android.Content;
-using AndroidX.Core.Content;
-using Xamarin.Forms;
 
 namespace NotesForYou.Droid
 {
@@ -29,9 +27,8 @@ namespace NotesForYou.Droid
             var notificationIntent = new Intent(this, typeof(NotificationIntentService));
 
             StartService(notificationIntent);
-
-            DependencyService.Get<IStartService>().StartForegroundService();
         }
+
         public override void OnBackPressed()
         {
             Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);

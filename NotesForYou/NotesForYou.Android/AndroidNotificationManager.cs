@@ -1,7 +1,6 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
-using Android.Graphics;
 using Android.OS;
 using AndroidX.Core.App;
 using JournalToGo.Droid;
@@ -49,22 +48,7 @@ namespace JournalToGo.Droid
             {
                 CreateNotificationChannel();
             }
-
-            if (notifyTime != null)
-            {
-                Intent intent = new Intent(AndroidApp.Context, typeof(AlarmManager));
-                intent.PutExtra(TitleKey, title);
-                intent.PutExtra(MessageKey, message);
-
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(AndroidApp.Context, pendingIntentId++, intent, PendingIntentFlags.CancelCurrent);
-                long triggerTime = GetNotifyTime((DateTime)notifyTime);
-                AlarmManager alarmManager = AndroidApp.Context.GetSystemService(Context.AlarmService) as AlarmManager;
-                alarmManager.Set(AlarmType.RtcWakeup, triggerTime, pendingIntent);
-            }
-            else
-            {
-                Show(title, message);
-            }
+            Show(title, message);
         }
 
         public void ReceiveNotification(string title, string message)
@@ -90,14 +74,13 @@ namespace JournalToGo.Droid
                 .SetContentTitle(title)
                 .SetContentText(message)
                 .SetVisibility((int)NotificationVisibility.Public)
-                //.SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Android.Resource.Drawable.AlertDarkFrame))
                 .SetSmallIcon(Android.Resource.Drawable.AlertDarkFrame);
 
             Notification notification = builder.Build();
             manager.Notify(messageId++, notification);
         }
 
-        void CreateNotificationChannel()
+        private void CreateNotificationChannel()
         {
             manager = (NotificationManager)AndroidApp.Context.GetSystemService(Context.NotificationService);
 
@@ -110,16 +93,7 @@ namespace JournalToGo.Droid
                 };
                 manager.CreateNotificationChannel(channel);
             }
-
             channelInitialized = true;
-        }
-
-        long GetNotifyTime(DateTime notifyTime)
-        {
-            DateTime utcTime = TimeZoneInfo.ConvertTimeToUtc(notifyTime);
-            double epochDiff = (new DateTime(1970, 1, 1) - DateTime.MinValue).TotalSeconds;
-            long utcAlarmTime = utcTime.AddSeconds(-epochDiff).Ticks / 10000;
-            return utcAlarmTime; // milliseconds
         }
     }
 }

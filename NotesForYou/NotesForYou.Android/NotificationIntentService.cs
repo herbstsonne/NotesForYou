@@ -1,16 +1,8 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Util;
-using Android.Views;
-using Android.Widget;
 using NotesForYou.Core;
-using NotesForYou.Core.AllEntries;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -28,7 +20,7 @@ namespace NotesForYou.Droid
             string servicename = typeof(NotificationIntentService).Name;
             Log.Info(servicename, "Starting background work: load random note");
 
-            Device.StartTimer(TimeSpan.FromSeconds(15), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
                 Task.Run(async () =>
                 {
@@ -39,22 +31,22 @@ namespace NotesForYou.Droid
                         note = await dataRetriever.SelectNote();
                         if (note == null)
                         {
-                            Console.WriteLine("No more new notes available.Add new ones :)");
+                            Console.WriteLine("No more new notes available." +
+                                "Add new ones :)");
+                            DependencyService.Get<INotificationManager>().SendNotification("No more new notes available." +
+                                "Add new ones :)", "");
                         }
                         else
                         {
                             DependencyService.Get<INotificationManager>().SendNotification(note.Headline, note.Link);
+                            intent.PutExtra("Link", note.Link);
+                            intent.PutExtra("Headline", note.Headline);
+                            intent.PutExtra("Category", note.Category);
                         }
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e.Message);
-                    }
-                    if (note != null)
-                    {
-                        intent.PutExtra("Link", note.Link);
-                        intent.PutExtra("Headline", note.Headline);
-                        intent.PutExtra("Category", note.Category);
                     }
                 });
                 return true;
