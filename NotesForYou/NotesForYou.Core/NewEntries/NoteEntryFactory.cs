@@ -1,4 +1,5 @@
 using System;
+using NotesForYou.Core.ShowMessage;
 
 namespace NotesForYou.Core.NewEntries
 {

@@ -9,6 +9,7 @@
              xmlns:local="clr-namespace:NotesForYou.Core.NewEntries;assembly=NotesForYou.Core"
              xmlns:enum="clr-namespace:NotesForYou.Core;assembly=NotesForYou.Core"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:showMessage="clr-namespace:NotesForYou.Core.ShowMessage;assembly=NotesForYou.Core"
              ios:Page.UseSafeArea="true"
              Routing.Route="NewEntryPage">
     <ContentPage.Content>
@@ -22,7 +23,7 @@
                 RepeatMode="Restart"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand" />
-            <Picker x:Name="CategoryPicker" ItemsSource="{ext:EnumBindingSource {x:Type enum:Category}}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+            <Picker x:Name="CategoryPicker" ItemsSource="{ext:EnumBindingSource {x:Type showMessage:Category}}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
             <Editor Placeholder="Headline" Text="{Binding Headline, Mode=TwoWay}" AutoSize="TextChanges" />
             <Editor Placeholder="Link" Text="{Binding Link, Mode=TwoWay}" AutoSize="TextChanges" />
             <StackLayout Orientation="Horizontal">

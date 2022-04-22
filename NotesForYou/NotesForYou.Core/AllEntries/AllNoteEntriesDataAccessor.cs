@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NotesForYou.Core.Database;
+using NotesForYou.Core.ShowMessage;
 
 namespace NotesForYou.Core.AllEntries
 {

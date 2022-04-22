@@ -1,9 +1,9 @@
 ﻿using System;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
-using NotesForYou.Core.Database;
+using NotesForYou.Core.Settings;
+using NotesForYou.Core.ShowMessage;
 
-namespace NotesForYou.Core
+namespace NotesForYou.Core.Database
 {
     public class NotesContext : DbContext
     {

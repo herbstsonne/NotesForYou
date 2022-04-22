@@ -146,10 +146,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\JournalToGo\JournalToGo.csproj">
-      <Project>{C9F46207-5867-4C27-A7F3-CBB8FCA4E685}</Project>
-      <Name>JournalToGo</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NotesForYou.Core\NotesForYou.Core.csproj">
       <Project>{F3B5283F-9840-49F0-8299-6967C706DDDD}</Project>
       <Name>StandardApp.Core</Name>

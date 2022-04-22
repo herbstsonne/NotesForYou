@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NotesForYou.Core
+namespace NotesForYou.Core.Settings
 {
     public class Setting
     {

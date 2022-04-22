@@ -1,8 +1,9 @@
-﻿using NotesForYou.Core.AllEntries;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using NotesForYou.Core.AllEntries;
+using NotesForYou.Core.ShowMessage;
 
-namespace NotesForYou.Core
+namespace NotesForYou.Core.Database
 {
     public class NotificationContentRetriever : INotificationContentRetriever
     {

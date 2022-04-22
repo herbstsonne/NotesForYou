@@ -1,3 +1,5 @@
+using NotesForYou.Core.ShowMessage;
+
 namespace NotesForYou.Core.NewEntries
 {
     public interface INewNoteDataAccessor

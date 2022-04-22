@@ -1,17 +1,16 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using FakeItEasy;
+using NotesForYou.Core.Login;
+using NotesForYou.Core.NewEntries;
+using NotesForYou.Core.ShowMessage;
+using NotesForYou.Test.Mocks;
 using NSubstitute;
 using NUnit.Framework;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using FakeItEasy;
-using NotesForYou.Core.Login;
-using NotesForYou.Core.NewEntries;
-using NotesForYou.Core;
-using System.Linq;
-using StandardApp.Test.Mocks;
 
-namespace JournalToGo.Test
+namespace NotesForYou.Test
 {
     public class ViewModelTests
     {

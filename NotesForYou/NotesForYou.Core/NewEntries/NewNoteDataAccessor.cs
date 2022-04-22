@@ -1,4 +1,6 @@
 using System;
+using NotesForYou.Core.Database;
+using NotesForYou.Core.ShowMessage;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.NewEntries

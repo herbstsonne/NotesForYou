@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace NotesForYou.Core
+namespace NotesForYou.Core.ShowMessage
 {
     public class NotificationEventArgs : EventArgs
     {
