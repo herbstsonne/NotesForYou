@@ -1,7 +1,6 @@
-﻿using System;
+﻿using NotesForYou.Core.AllEntries;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -22,7 +21,11 @@ namespace NotesForYou.Core.Settings
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            Task.Run(() => Navigation.PopToRootAsync());
+            Task.Run(async () =>
+            {
+                //await Navigation.PopToRootAsync();
+                await Shell.Current.GoToAsync($"//{nameof(EntriesPage)}");
+            });
         }
     }
 }

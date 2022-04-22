@@ -81,14 +81,5 @@ namespace NotesForYou.Core.AllEntries
         {
             await Shell.Current.GoToAsync(nameof(NewEntryPage));
         }
-
-        //async void OnItemSelected(Note item)
-        //{
-        //    if (item == null)
-        //        return;
-
-        //    // This will push the ItemDetailPage onto the navigation stack
-        //    await Shell.Current.GoToAsync($"{nameof(DailyEntryPage)}?{nameof(DailyEntryViewModel.ItemId)}={item.Id}");
-        //}
     }
 }

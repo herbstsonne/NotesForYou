@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NotesForYou.Core.AllEntries;
+using NotesForYou.Core.Settings;
 using System;
 using Xamarin.Forms;
 
@@ -30,7 +31,7 @@ namespace NotesForYou.Core
         {
         }
 
-        void SetupServices()
+        private void SetupServices()
         {
             var services = new ServiceCollection();
 
@@ -40,9 +41,11 @@ namespace NotesForYou.Core
             {
                 DataAccessor = dataAccessor
             };
+            var settingsAccessor = new SettingsDataAccessor(dbContext);
 
             DependencyService.RegisterSingleton(dbContext);
             DependencyService.RegisterSingleton<INotificationContentRetriever>(contentRetriever);
+            DependencyService.RegisterSingleton(settingsAccessor);
 
             ServiceProvider = services.BuildServiceProvider();
         }

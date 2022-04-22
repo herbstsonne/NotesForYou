@@ -7,22 +7,13 @@ namespace NotesForYou.Core.Settings
     public class SettingsViewModel : BaseViewModel
     {
         private SettingsDataAccessor _dataAccessor;
-        private TimeSpan _showTime;
-        private DateTime _minDate;
-        private DateTime _maxDate;
+        private TimeSpan difference;
+        private DateTime minDate;
+        private DateTime maxDate;
 
-        public DateTime MinDate
-        {
-            get => _minDate;
-            set => SetProperty(ref _minDate, value);
-        }
-        public DateTime MaxDate
-        {
-            get => _maxDate;
-            set => SetProperty(ref _maxDate, value);
-        }
+        private DateTime _showTime;
 
-        public TimeSpan ShowTime
+        public DateTime ShowTime
         {
             get => _showTime;
             set => SetProperty(ref _showTime, value);
@@ -33,7 +24,7 @@ namespace NotesForYou.Core.Settings
 
         public SettingsViewModel()
         {
-            _dataAccessor = new SettingsDataAccessor(_noteContext);
+            _dataAccessor = DependencyService.Resolve<SettingsDataAccessor>();
 
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
@@ -41,9 +32,9 @@ namespace NotesForYou.Core.Settings
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
 
-            _showTime = new TimeSpan(9, 0, 0);
-            _minDate = new DateTime(2021, 12, 24);
-            _maxDate = DateTime.MaxValue;
+            difference = new TimeSpan(0, 0, 15);
+            minDate = DateTime.Now;
+            maxDate = DateTime.MaxValue;
         }
 
         private async void OnCancel()
@@ -54,7 +45,7 @@ namespace NotesForYou.Core.Settings
 
         private async void OnSave()
         {
-            var setting = SettingsFactory.Create(ShowTime);
+            var setting = SettingsFactory.Create(difference, minDate, maxDate);
 
             await _dataAccessor.Save(setting);
 

@@ -1,10 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NotesForYou.Core
 {
     public class Setting
     {
-        public Guid Id { get; set; }
-        public TimeSpan ShowTime { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public TimeSpan Difference { get; set; }
+        public DateTime MinDate { get; set; }
+        public DateTime MaxDate { get; set; }
     }
 }
