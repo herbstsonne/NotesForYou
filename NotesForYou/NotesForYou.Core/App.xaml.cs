@@ -36,6 +36,8 @@ namespace NotesForYou.Core
             var services = new ServiceCollection();
 
             var dbContext = new NotesContext();
+            DependencyService.RegisterSingleton(dbContext);
+
             var dataAccessor = new AllNoteEntriesDataAccessor(dbContext);
             var contentRetriever = new NotificationContentRetriever()
             {
@@ -43,7 +45,6 @@ namespace NotesForYou.Core
             };
             var settingsAccessor = new SettingsDataAccessor(dbContext);
 
-            DependencyService.RegisterSingleton(dbContext);
             DependencyService.RegisterSingleton<INotificationContentRetriever>(contentRetriever);
             DependencyService.RegisterSingleton(settingsAccessor);
 
