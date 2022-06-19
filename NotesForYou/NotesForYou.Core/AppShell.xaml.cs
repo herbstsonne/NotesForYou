@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using NotesForYou.Core.AllEntries;
 using NotesForYou.Core.Login;
 using NotesForYou.Core.NewEntries;
@@ -21,17 +22,28 @@ namespace NotesForYou.Core
 
         private async void OnLogoutClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new LoginPage());
+            await NavigateTo(new LoginPage());
         }
 
         private async void OnSettingsClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SettingsPage());
+            await NavigateTo(new SettingsPage());
         }
 
         private async void OnNotesClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new EntriesPage());
+            await NavigateTo(new EntriesPage());
+        }
+
+        private async Task NavigateTo(ContentPage page)
+        {
+            var currentType = CurrentPage.GetType();
+            if (currentType == page?.GetType())
+            {
+                Current.FlyoutIsPresented = false;
+                return;
+            }
+            await Navigation.PushAsync(page);
         }
     }
 }
