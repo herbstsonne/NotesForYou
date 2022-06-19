@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using NotesForYou.Core.NewEntries;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -12,7 +10,7 @@ namespace NotesForYou.Core.AllEntries
 {
     public class NotesViewModel : BaseViewModel
     {
-        private readonly AllNoteEntriesDataAccessor _dataAccessor;
+        private readonly INoteForwarder _noteForwarder;
         private Note _selectedItem;
 
         public ObservableCollection<Note> Entries { get; }
@@ -29,9 +27,7 @@ namespace NotesForYou.Core.AllEntries
 
             AddEntryCommand = new Command(OnAddItem);
 
-            var contentRetriever = DependencyService.Resolve<INotificationContentRetriever>();
-
-            _dataAccessor = contentRetriever.DataAccessor;
+            _noteForwarder = DependencyService.Resolve<INoteForwarder>();
         }
 
         private async Task ExecuteClickLinkCommand(string url)
@@ -42,24 +38,9 @@ namespace NotesForYou.Core.AllEntries
         private async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
-
-            try
-            {
-                Entries.Clear();
-                var currentEntries = await _dataAccessor.GetAll();
-                foreach (var entry in currentEntries)
-                {
-                    Entries.Add(entry);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            await _noteForwarder.ShowAllEntries(Entries);
+            IsBusy = false;
+            
         }
 
         public Note SelectedItem

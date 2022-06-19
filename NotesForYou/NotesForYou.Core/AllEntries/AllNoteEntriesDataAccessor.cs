@@ -49,6 +49,7 @@ namespace NotesForYou.Core.AllEntries
         
         public void Dispose()
         {
+            //TODO
         }
     }
 }
