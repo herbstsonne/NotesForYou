@@ -1,4 +1,6 @@
 ﻿
+using NotesForYou.Core.ShowMessage;
+
 namespace NotesForYou.Core.Extension
 {
     public static class MessageExtension

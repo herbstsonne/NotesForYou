@@ -1,4 +1,6 @@
 ﻿using NotesForYou.Core.AllEntries;
+using NotesForYou.Core.Database;
+using NotesForYou.Core.ShowMessage;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
