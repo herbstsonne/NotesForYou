@@ -3,14 +3,13 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using AndroidX.Core.App;
-using JournalToGo.Droid;
-using NotesForYou.Core;
+using NotesForYou.Core.ShowMessage;
 using NotesForYou.Droid;
 using Xamarin.Forms;
 using AndroidApp = Android.App.Application;
 
 [assembly: Dependency(typeof(AndroidNotificationManager))]
-namespace JournalToGo.Droid
+namespace NotesForYou.Droid
 {
     public class AndroidNotificationManager : INotificationManager
     {

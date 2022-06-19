@@ -1,8 +1,9 @@
-﻿using NotesForYou.Core.AllEntries;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using NotesForYou.Core.AllEntries;
+using NotesForYou.Core.ShowMessage;
 
-namespace NotesForYou.Core
+namespace NotesForYou.Core.Database
 {
     public interface INoteForwarder
     {

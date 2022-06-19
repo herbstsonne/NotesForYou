@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace JournalToGo.Droid.Resources.drawable {
-    using System;
-    
-    
+namespace NotesForYou.Droid.Resources.drawable {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

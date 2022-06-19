@@ -1,5 +1,4 @@
-﻿using NotesForYou.Core.ShowTime;
-using System;
+﻿using System;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.Settings

@@ -2,6 +2,7 @@
 using NotesForYou.Core.AllEntries;
 using NotesForYou.Core.Settings;
 using System;
+using NotesForYou.Core.Database;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core

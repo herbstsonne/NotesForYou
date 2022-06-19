@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotesForYou.Core.ShowTime
+namespace NotesForYou.Core.Settings
 {
     public class SettingsFactory
     {

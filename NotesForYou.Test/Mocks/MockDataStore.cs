@@ -1,10 +1,10 @@
-﻿using NotesForYou.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NotesForYou.Core.ShowMessage;
 
-namespace StandardApp.Test.Mocks
+namespace NotesForYou.Test.Mocks
 {
     public class MockDataStore : IDataStore<Note>
     {

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StandardApp.Test.Mocks
+namespace NotesForYou.Test.Mocks
 {
     public interface IDataStore<T>
     {

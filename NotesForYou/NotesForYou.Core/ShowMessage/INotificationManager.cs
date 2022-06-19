@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotesForYou.Core
+namespace NotesForYou.Core.ShowMessage
 {
     public interface INotificationManager
     {

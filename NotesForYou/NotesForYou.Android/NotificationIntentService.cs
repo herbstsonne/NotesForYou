@@ -3,6 +3,8 @@ using Android.Content;
 using NotesForYou.Core;
 using System;
 using System.Threading.Tasks;
+using NotesForYou.Core.Database;
+using NotesForYou.Core.ShowMessage;
 using Xamarin.Forms;
 
 namespace NotesForYou.Droid

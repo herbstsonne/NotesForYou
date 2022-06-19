@@ -4,6 +4,7 @@
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              xmlns:local="clr-namespace:NotesForYou.Core.AllEntries;assembly=NotesForYou.Core"
              xmlns:notesForYou="clr-namespace:NotesForYou.Core;assembly=NotesForYou.Core"
+             xmlns:showMessage="clr-namespace:NotesForYou.Core.ShowMessage;assembly=NotesForYou.Core"
              x:Class="NotesForYou.Core.AllEntries.EntriesPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage"
@@ -44,14 +45,14 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                         <StackLayout Padding="10">
-                            <Label x:DataType="notesForYou:Note" Text="{Binding Date, StringFormat='{0:dd. MMMM yyyy}'}" 
+                            <Label x:DataType="showMessage:Note" Text="{Binding Date, StringFormat='{0:dd. MMMM yyyy}'}" 
                             LineBreakMode="NoWrap" 
                             FontSize="16" />
-                            <Label x:DataType="notesForYou:Note" Text="{Binding Headline}" 
+                            <Label x:DataType="showMessage:Note" Text="{Binding Headline}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemTextStyle}"
                             FontSize="13" />
-                            <Label x:DataType="notesForYou:Note">
+                            <Label x:DataType="showMessage:Note">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Link}" TextColor="Blue" TextDecorations="Underline">
