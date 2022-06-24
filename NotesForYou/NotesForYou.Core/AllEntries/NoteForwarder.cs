@@ -1,13 +1,11 @@
-﻿using NotesForYou.Core.AllEntries;
-using NotesForYou.Core.Database;
-using NotesForYou.Core.ShowMessage;
+﻿using NotesForYou.Core.ShowMessage;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static NotesForYou.Core.Extension.MessageExtension;
 
-namespace NotesForYou.Core
+namespace NotesForYou.Core.AllEntries
 {
     public class NoteForwarder : INoteForwarder
     {

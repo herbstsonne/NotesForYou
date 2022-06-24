@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using NotesForYou.Core.Database;
 using NotesForYou.Core.NewEntries;
 using NotesForYou.Core.ShowMessage;
 using Xamarin.Essentials;
