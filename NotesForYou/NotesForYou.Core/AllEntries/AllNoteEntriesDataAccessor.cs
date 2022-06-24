@@ -31,12 +31,6 @@ namespace NotesForYou.Core.AllEntries
             return entries;
         }
 
-        public async Task<Note> GetLatestNote()
-        {
-            var latestNote = await _context.Note.FirstOrDefaultAsync(x => x.Date != null);
-            return latestNote;
-        }
-
         public async Task<Note> GetRandomNote()
         {
             return await _context.Note.FirstOrDefaultAsync(x => x.Date == null);

@@ -15,17 +15,14 @@ namespace NotesForYou.Test
     {
         private IAllNoteEntriesDataAccessor _sut;
         private Mock<NotesContext> _mockContext;
+        private IList<Note> entities;
 
         [SetUp]
         public void Setup()
         {
             _mockContext = new Mock<NotesContext>();
-            _sut = new AllNoteEntriesDataAccessor(_mockContext.Object); 
-        }
+            _sut = new AllNoteEntriesDataAccessor(_mockContext.Object);
 
-        [Test]
-        public async Task WhenGetAllAndNotesAvailable_ThenGetAllNotesSortedByDate()
-        {
             var note1 = new Note
             {
                 Date = DateTime.Now.AddDays(1)
@@ -38,9 +35,13 @@ namespace NotesForYou.Test
             {
                 Date = DateTime.Now
             };
-            IList<Note> entities = new List<Note> { note1, note2, note3, note2 };
+            entities = new List<Note> { note1, note2, note3, note2 };
             _mockContext.Setup(x => x.Note).ReturnsDbSet(entities);
+        }
 
+        [Test]
+        public async Task WhenGetAllAndNotesAvailable_ThenGetAllNotesSortedByDate()
+        {
             var res = await _sut.GetAll();
 
             res.Should().NotBeNull();
@@ -53,28 +54,52 @@ namespace NotesForYou.Test
         [Test]
         public async Task WhenGetAllAndNotesAvailable_ThenGetAllNotesWithDateNotNull()
         {
-            var note1 = new Note
-            {
-                Date = DateTime.Now.AddDays(1)
-            };
-            var note2 = new Note
+            var note5 = new Note
             {
               
             };
-            var note3 = new Note
-            {
-                Date = DateTime.Now
-            };
-            IList<Note> entities = new List<Note> { note1, note2, note3, note2 };
+            entities.Add(note5);
             _mockContext.Setup(x => x.Note).ReturnsDbSet(entities);
+            entities.Count.Should().Be(5);
 
             var res = await _sut.GetAll();
 
             res.Should().NotBeNull();
-            res.Count.Should().Be(2);
+            res.Count.Should().Be(4);
             res[0].Date.Should().NotBeNull();
             res[1].Date.Should().NotBeNull();
-            res[0].Date.Should().BeBefore((DateTime)res[1].Date);
+            res[2].Date.Should().NotBeNull();
+            res[3].Date.Should().NotBeNull();
+        }
+
+        [Test]
+        public async Task WhenGetRandomNotes_ThenGetOneRandomNote()
+        {
+            var note5 = new Note
+            {
+
+            };
+            entities.Add(note5);
+            _mockContext.Setup(x => x.Note).ReturnsDbSet(entities);
+            var res = await _sut.GetRandomNote();
+
+            res.Should().NotBeNull();
+            res.Date.Should().BeNull();
+            entities.Should().Contain(res);
+        }
+
+        [Test]
+        public void WhenUpdateNote_ThenSetCurrentDate()
+        {
+            var note = new Note { };
+            entities.Add(note);
+            _mockContext.Setup(x => x.Note).ReturnsDbSet(entities);
+
+            _sut.UpdateNote(note);
+
+            note.Should().NotBeNull();
+            note.Date.Should().NotBeNull();
+            entities.Should().Contain(note);
         }
     }
 }
