@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Microsoft.Extensions.DependencyInjection;
 using NotesForYou.Core;
 using UIKit;
 
@@ -22,7 +23,9 @@ namespace JournalToGo.iOS
             Rg.Plugins.Popup.Popup.Init();
             SQLitePCL.Batteries_V2.Init();
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            var serviceCollection = new ServiceCollection();
+            LoadApplication(new App(serviceCollection));
 
             return base.FinishedLaunching(app, options);
         }

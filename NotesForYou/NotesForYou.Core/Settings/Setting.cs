@@ -8,7 +8,6 @@ namespace NotesForYou.Core.Settings
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public TimeSpan Difference { get; set; }
-        public DateTime MinDate { get; set; }
-        public DateTime MaxDate { get; set; }
+        public TimeSpan ShowTime { get; set; }
     }
 }

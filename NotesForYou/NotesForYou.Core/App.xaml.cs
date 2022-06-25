@@ -9,12 +9,15 @@ namespace NotesForYou.Core
 {
     public partial class App : Application
     {
-        protected static IServiceProvider ServiceProvider { get; set; }
+        private readonly ServiceCollection _serviceCollection;
 
-        public App()
+        public static IServiceProvider ServiceProvider { get; set; }
+
+        public App(ServiceCollection serviceCollection)
         {
             InitializeComponent();
 
+            this._serviceCollection = serviceCollection;
             SetupServices();
 
             MainPage = new AppShell();
@@ -34,19 +37,21 @@ namespace NotesForYou.Core
 
         private void SetupServices()
         {
-            var services = new ServiceCollection();
-
             var dbContext = new NotesContext();
-            DependencyService.RegisterSingleton(dbContext);
+            //DependencyService.RegisterSingleton(dbContext);
 
             var dataAccessor = new AllNoteEntriesDataAccessor(dbContext);
             var contentRetriever = new NoteForwarder(dataAccessor);
             var settingsAccessor = new SettingsDataAccessor(dbContext);
 
-            DependencyService.RegisterSingleton<INoteForwarder>(contentRetriever);
-            DependencyService.RegisterSingleton(settingsAccessor);
+            //DependencyService.RegisterSingleton<INoteForwarder>(contentRetriever);
+            //DependencyService.RegisterSingleton<ISettingsDataAccessor>(settingsAccessor);
 
-            ServiceProvider = services.BuildServiceProvider();
+            _serviceCollection.AddSingleton<NotesContext>(dbContext);
+            _serviceCollection.AddSingleton<INoteForwarder>(contentRetriever);
+            _serviceCollection.AddSingleton<ISettingsDataAccessor>(settingsAccessor);
+
+            ServiceProvider = _serviceCollection.BuildServiceProvider();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace NotesForYou.Core.AllEntries
 
             AddEntryCommand = new Command(OnAddItem);
 
-            _noteForwarder = DependencyService.Resolve<INoteForwarder>();
+            _noteForwarder = (INoteForwarder)App.ServiceProvider.GetService(typeof(INoteForwarder));
         }
 
         private async Task ExecuteClickLinkCommand(string url)
