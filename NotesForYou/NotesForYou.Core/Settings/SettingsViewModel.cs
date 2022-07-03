@@ -1,5 +1,6 @@
 ﻿using NotesForYou.Core.AllEntries;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.Settings
@@ -30,12 +31,17 @@ namespace NotesForYou.Core.Settings
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
 
+            Device.InvokeOnMainThreadAsync(async () =>
+            {
+                _showTime = await _dataAccessor.GetShowTime();
+            }
+            );
             difference = new TimeSpan(0, 0, 15);
         }
 
         private async void OnCancel()
         {
-            await NotesForYouNavigation.NavigateTo(new EntriesPage());
+            await NotesForYouNavigation.NavigateToMainPage();
         }
 
         private async void OnSave()
@@ -43,8 +49,8 @@ namespace NotesForYou.Core.Settings
             var setting = SettingsFactory.Create(difference, _showTime);
 
             await _dataAccessor.Save(setting);
-            await NotesForYouNavigation.NavigateTo(new EntriesPage());
-            await SettingsNotifier.ShowNotificationInDefinedTimes?.Invoke();
+            await NotesForYouNavigation.NavigateToMainPage();
+            await (SettingsNotifier.ShowNotificationInDefinedTimes?.Invoke()).ConfigureAwait(false);
         }
     }
 }

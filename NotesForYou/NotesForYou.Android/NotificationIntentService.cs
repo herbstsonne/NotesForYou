@@ -45,18 +45,25 @@ namespace NotesForYou.Droid
             }
         }
 
-        private void ShowNotificationEvery24Hours()
+        private async void ShowNotificationEvery24Hours()
         {
-            Console.WriteLine("Start new timer");
-            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
+            Console.WriteLine($"Start new timer at: {DateTime.Now}");
+            await ShowFirstNote();
+
+            Device.StartTimer(TimeSpan.FromDays(1), () =>
             {
                 Task.Run(async () =>
                 {
-                    var dataRetriever = (INoteForwarder)App.ServiceProvider.GetService(typeof(INoteForwarder));
-                    await dataRetriever.DisplayNotification();
+                    await ShowFirstNote();
                 });
                 return true;
             });
+        }
+
+        private async Task ShowFirstNote()
+        {
+            var dataRetriever = (INoteForwarder)App.ServiceProvider.GetService(typeof(INoteForwarder));
+            await dataRetriever.DisplayNotification();
         }
     }
 }

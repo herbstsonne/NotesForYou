@@ -2,6 +2,7 @@
 using NotesForYou.Core.Login;
 using NotesForYou.Core.NewEntries;
 using NotesForYou.Core.Settings;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -25,7 +26,19 @@ namespace NotesForYou.Core
                 Shell.Current.FlyoutIsPresented = false;
                 return;
             }
-            await Shell.Current?.Navigation?.PushAsync(page);
+            var navigation = Shell.Current.Navigation;
+            if(navigation.NavigationStack.Count > 0)
+                await navigation.PopToRootAsync();
+            await navigation.PushAsync(page);
+        }
+
+        public static async Task NavigateToMainPage()
+        {
+            Shell.Current.FlyoutIsPresented = false;
+            var navigation = Shell.Current.Navigation;
+            if (!navigation.NavigationStack.Any())
+                return;
+            await navigation.PopToRootAsync();
         }
     }
 }
