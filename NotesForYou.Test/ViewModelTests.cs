@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using FakeItEasy;
+using NotesForYou.Core;
+using NotesForYou.Core.AddNote;
 using NotesForYou.Core.Login;
-using NotesForYou.Core.NewEntries;
-using NotesForYou.Core.ShowMessage;
 using NotesForYou.Test.Mocks;
 using NSubstitute;
 using NUnit.Framework;
@@ -39,7 +39,7 @@ namespace NotesForYou.Test
         [Test]
         public async Task Check_if_new_entry_is_created()
         {
-            var _viewModel = Substitute.For<NewNoteViewModel>();
+            var _viewModel = Substitute.For<AddNoteViewModel>();
 
             _dataStore = new MockDataStore();
             var entriesBefore = await _dataStore.GetEntriesAsync();

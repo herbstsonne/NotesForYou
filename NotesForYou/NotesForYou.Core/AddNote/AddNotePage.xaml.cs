@@ -1,23 +1,22 @@
 ﻿using System;
-using NotesForYou.Core.ShowMessage;
 using Xamarin.Forms;
 
-namespace NotesForYou.Core.NewEntries
+namespace NotesForYou.Core.AddNote
 {
-    public partial class NewEntryPage : ContentPage
+    public partial class AddNotePage : ContentPage
     {
         public Note Note { get; set; }
 
-        public NewEntryPage()
+        public AddNotePage()
         {
             InitializeComponent();
-            BindingContext = new NewNoteViewModel();
+            BindingContext = new AddNoteViewModel();
         }
 
         private void Picker_SelectedIndexChanged(object o, EventArgs e)
         {
             var picker = (Picker)o;
-            var context = (NewNoteViewModel)BindingContext;
+            var context = (AddNoteViewModel)BindingContext;
             if (picker.SelectedIndex == -1)
                 return;
             context.SelectedCategory = (Category)picker.SelectedIndex;

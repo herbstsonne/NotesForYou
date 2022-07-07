@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:allEntries="clr-namespace:NotesForYou.Core.AllEntries;assembly=NotesForYou.Core"
+       xmlns:notes="clr-namespace:NotesForYou.Core.Notes;assembly=NotesForYou.Core"
        xmlns:login="clr-namespace:NotesForYou.Core.Login;assembly=NotesForYou.Core"
        Title="NotesForYou.Core"
        x:Class="NotesForYou.Core.AppShell">
@@ -62,8 +62,8 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Your entries" Icon="icon_feed.png">
-        <ShellContent Route="EntriesPage" ContentTemplate="{DataTemplate allEntries:EntriesPage}" />
+    <FlyoutItem Title="Your notes" Icon="icon_feed.png">
+        <ShellContent Route="NotesPage" ContentTemplate="{DataTemplate notes:NotesPage}" />
     </FlyoutItem>
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->

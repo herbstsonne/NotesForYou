@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using NotesForYou.Core.Settings;
-using NotesForYou.Core.ShowMessage;
 
 namespace NotesForYou.Core.Database
 {

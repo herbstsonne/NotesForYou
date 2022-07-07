@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using NotesForYou.Core.ShowMessage;
+using NotesForYou.Core.ShowNote;
 using Xamarin.Forms;
 
-namespace NotesForYou.Core.NewEntries
+namespace NotesForYou.Core.AddNote
 {
-    public class NewNoteViewModel : BaseViewModel
+    public class AddNoteViewModel : BaseViewModel
     {
         private DateTime _day;
         private string _headline;
         private string _link;
         private Category _category;
-        private INewNoteDataAccessor _newEntryhandler;
+        private IAddNoteDataAccessor _newEntryhandler;
 
         public DateTime Day
         {
@@ -39,15 +39,15 @@ namespace NotesForYou.Core.NewEntries
 
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
-        
-        public NewNoteViewModel()
+
+        public AddNoteViewModel()
         {
-            _newEntryhandler = new NewNoteDataAccessor();
-            
+            _newEntryhandler = new AddNoteDataAccessor();
+
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
-            
-            this.PropertyChanged +=
+
+            PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
@@ -64,11 +64,11 @@ namespace NotesForYou.Core.NewEntries
 
         private async void OnSave()
         {
-            var note = NoteEntryFactory.Create((int)SelectedCategory, Headline, Link);
+            var note = AddNoteFactory.Create((int)SelectedCategory, Headline, Link);
 
             _newEntryhandler.Save(note);
 
-            if(Shell.Current == null)
+            if (Shell.Current == null)
                 return;
             await Shell.Current.GoToAsync("..");
         }

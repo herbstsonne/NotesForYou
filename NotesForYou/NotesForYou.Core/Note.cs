@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NotesForYou.Core.ShowMessage
+namespace NotesForYou.Core
 {
     public class Note
     {

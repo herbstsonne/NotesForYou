@@ -1,4 +1,4 @@
-﻿using NotesForYou.Core.AllEntries;
+﻿using NotesForYou.Core.Notes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -23,8 +23,7 @@ namespace NotesForYou.Core.Settings
             base.OnDisappearing();
             Task.Run(async () =>
             {
-                //await Navigation.PopToRootAsync();
-                await Shell.Current.GoToAsync($"//{nameof(EntriesPage)}");
+                await NotesForYouNavigation.NavigateTo(new NotesPage());
             });
         }
     }

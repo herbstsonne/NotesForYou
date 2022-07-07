@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Moq;
 using Moq.EntityFrameworkCore;
-using NotesForYou.Core.AllEntries;
+using NotesForYou.Core;
 using NotesForYou.Core.Database;
-using NotesForYou.Core.ShowMessage;
+using NotesForYou.Core.Notes;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace NotesForYou.Test
 {
     public class AllNoteEntriesDataAccessorTests
     {
-        private IAllNoteEntriesDataAccessor _sut;
+        private INotesDataAccessor _sut;
         private Mock<NotesContext> _mockContext;
         private IList<Note> entities;
 
@@ -21,7 +21,7 @@ namespace NotesForYou.Test
         public void Setup()
         {
             _mockContext = new Mock<NotesContext>();
-            _sut = new AllNoteEntriesDataAccessor(_mockContext.Object);
+            _sut = new NotesDataAccessor(_mockContext.Object);
 
             var note1 = new Note
             {

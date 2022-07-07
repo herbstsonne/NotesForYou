@@ -1,21 +1,21 @@
 ﻿using Moq;
-using NotesForYou.Core.AllEntries;
+using NotesForYou.Core.Notes;
 using NUnit.Framework;
 using System.Threading.Tasks;
 using FluentAssertions;
-using NotesForYou.Core.ShowMessage;
+using NotesForYou.Core;
 
 namespace NotesForYou.Test
 {
     public class NoteForwarderTests
     {
         private INoteForwarder _sut;
-        private Mock<IAllNoteEntriesDataAccessor> _mockDataAccessor;
+        private Mock<INotesDataAccessor> _mockDataAccessor;
 
         [SetUp]
         public void Setup()
         {
-            _mockDataAccessor = new Mock<IAllNoteEntriesDataAccessor>();
+            _mockDataAccessor = new Mock<INotesDataAccessor>();
             _sut = new NoteForwarder(_mockDataAccessor.Object);
         }
 

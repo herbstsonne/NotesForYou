@@ -2,18 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             x:Class="NotesForYou.Core.NewEntries.NewEntryPage"
+             x:Class="NotesForYou.Core.AddNote.AddNotePage"
              Shell.PresentationMode="ModalAnimated"
-             Title="Neue Nachricht"
+             Title="Add Note"
              xmlns:ext="clr-namespace:NotesForYou.Core.Extension;assembly=NotesForYou.Core"
-             xmlns:local="clr-namespace:NotesForYou.Core.NewEntries;assembly=NotesForYou.Core"
-             xmlns:enum="clr-namespace:NotesForYou.Core;assembly=NotesForYou.Core"
+             xmlns:local="clr-namespace:NotesForYou.Core.AddNote;assembly=NotesForYou.Core"
+             xmlns:core="clr-namespace:NotesForYou.Core;assembly=NotesForYou.Core"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:showMessage="clr-namespace:NotesForYou.Core.ShowMessage;assembly=NotesForYou.Core"
              ios:Page.UseSafeArea="true"
-             Routing.Route="NewEntryPage">
+             Routing.Route="AddNotePage">
     <ContentPage.Content>
-        <StackLayout Spacing="3" Padding="15"  x:DataType="local:NewNoteViewModel">
+        <StackLayout Spacing="3" Padding="15"  x:DataType="local:AddNoteViewModel">
 
             <forms:AnimationView
                 x:Name="animationView"
@@ -23,7 +22,7 @@
                 RepeatMode="Restart"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand" />
-            <Picker x:Name="CategoryPicker" ItemsSource="{ext:EnumBindingSource {x:Type showMessage:Category}}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+            <Picker x:Name="CategoryPicker" ItemsSource="{ext:EnumBindingSource {x:Type core:Category}}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
             <Editor Placeholder="Headline" Text="{Binding Headline, Mode=TwoWay}" AutoSize="TextChanges" />
             <Editor Placeholder="Link" Text="{Binding Link, Mode=TwoWay}" AutoSize="TextChanges" />
             <StackLayout Orientation="Horizontal">

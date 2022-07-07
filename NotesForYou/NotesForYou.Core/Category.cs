@@ -1,5 +1,4 @@
-﻿
-namespace NotesForYou.Core.ShowMessage
+﻿namespace NotesForYou.Core
 {
     public enum Category
     {

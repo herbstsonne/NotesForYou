@@ -3,7 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using AndroidX.Core.App;
-using NotesForYou.Core.ShowMessage;
+using NotesForYou.Core.ShowNote;
 using NotesForYou.Droid;
 using Xamarin.Forms;
 using AndroidApp = Android.App.Application;
@@ -50,17 +50,7 @@ namespace NotesForYou.Droid
             Show(title, message);
         }
 
-        public void ReceiveNotification(string title, string message)
-        {
-            var args = new NotificationEventArgs()
-            {
-                Title = title,
-                Message = message,
-            };
-            NotificationReceived?.Invoke(null, args);
-        }
-
-        public void Show(string title, string message)
+        private void Show(string title, string message)
         {
             Intent intent = new Intent(AndroidApp.Context, typeof(MainActivity));
             intent.PutExtra(TitleKey, title);

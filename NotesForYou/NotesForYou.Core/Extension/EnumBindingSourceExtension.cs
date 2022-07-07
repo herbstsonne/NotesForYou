@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 namespace NotesForYou.Core.Extension
 {
     /// <summary>
-    /// TODO needed?
+    /// needed for category enum picker
     /// </summary>
     [ContentProperty(nameof(Type))]
     public class EnumBindingSourceExtension : IMarkupExtension

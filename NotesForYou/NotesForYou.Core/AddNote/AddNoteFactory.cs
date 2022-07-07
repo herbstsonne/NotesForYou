@@ -1,9 +1,6 @@
-using System;
-using NotesForYou.Core.ShowMessage;
-
-namespace NotesForYou.Core.NewEntries
+namespace NotesForYou.Core.AddNote
 {
-    public static class NoteEntryFactory
+    public static class AddNoteFactory
     {
         public static Note Create(int category, string headline, string dailyThoughtsText)
         {

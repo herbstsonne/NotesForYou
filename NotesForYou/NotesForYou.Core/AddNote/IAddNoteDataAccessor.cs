@@ -1,8 +1,6 @@
-using NotesForYou.Core.ShowMessage;
-
-namespace NotesForYou.Core.NewEntries
+namespace NotesForYou.Core.AddNote
 {
-    public interface INewNoteDataAccessor
+    public interface IAddNoteDataAccessor
     {
         bool Validate(string headline, string dailyThoughtsText, Category _category);
         void Save(Note entry);

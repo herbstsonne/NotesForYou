@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using NotesForYou.Core.NewEntries;
-using NotesForYou.Core.ShowMessage;
+using NotesForYou.Core.AddNote;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace NotesForYou.Core.AllEntries
+namespace NotesForYou.Core.Notes
 {
     public class NotesViewModel : BaseViewModel
     {
@@ -33,7 +31,7 @@ namespace NotesForYou.Core.AllEntries
 
         private async Task ExecuteClickLinkCommand(string url)
         {
-            await Launcher.OpenAsync(new System.Uri(url));
+            await Launcher.OpenAsync(new Uri(url));
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -41,7 +39,7 @@ namespace NotesForYou.Core.AllEntries
             IsBusy = true;
             await _noteForwarder.ShowAllEntries(Entries);
             IsBusy = false;
-            
+
         }
 
         public Note SelectedItem
@@ -61,7 +59,7 @@ namespace NotesForYou.Core.AllEntries
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewEntryPage));
+            await Shell.Current.GoToAsync(nameof(AddNotePage));
         }
     }
 }
