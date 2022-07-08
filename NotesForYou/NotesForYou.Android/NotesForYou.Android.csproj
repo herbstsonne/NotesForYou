@@ -75,7 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidNotificationManager.cs" />
-    <Compile Include="CustomLabelRenderer.cs" />
     <Compile Include="NotificationIntentService.cs" />
     <Compile Include="Resources\drawable\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
