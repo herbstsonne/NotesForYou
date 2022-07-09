@@ -40,7 +40,7 @@ namespace NotesForYou.Core
             var dbContext = new NotesContext();
             //DependencyService.RegisterSingleton(dbContext);
 
-            var dataAccessor = new AllNoteEntriesDataAccessor(dbContext);
+            var dataAccessor = new NotesDataAccessor(dbContext);
             var contentRetriever = new NoteForwarder(dataAccessor);
             var settingsAccessor = new SettingsDataAccessor(dbContext);
 

@@ -8,11 +8,11 @@ using NotesForYou.Core.ShowMessage;
 
 namespace NotesForYou.Core.AllEntries
 {
-    public class AllNoteEntriesDataAccessor : IAllNoteEntriesDataAccessor, IDisposable
+    public class NotesDataAccessor : INotesDataAccessor, IDisposable
     {
         private readonly NotesContext _context;
 
-        public AllNoteEntriesDataAccessor(NotesContext context)
+        public NotesDataAccessor(NotesContext context)
         {
             _context = context;
         }
@@ -45,7 +45,7 @@ namespace NotesForYou.Core.AllEntries
         
         public void Dispose()
         {
-            //TODO
+            _context.Dispose();
         }
     }
 }

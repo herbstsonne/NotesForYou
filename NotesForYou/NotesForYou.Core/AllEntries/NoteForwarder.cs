@@ -9,9 +9,9 @@ namespace NotesForYou.Core.AllEntries
 {
     public class NoteForwarder : INoteForwarder
     {
-        private readonly IAllNoteEntriesDataAccessor _dataAccessor;
+        private readonly INotesDataAccessor _dataAccessor;
 
-        public NoteForwarder(IAllNoteEntriesDataAccessor dataAccessor)
+        public NoteForwarder(INotesDataAccessor dataAccessor)
         {
             _dataAccessor = dataAccessor;
         }

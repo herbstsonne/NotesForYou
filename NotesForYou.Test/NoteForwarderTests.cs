@@ -10,12 +10,12 @@ namespace NotesForYou.Test
     public class NoteForwarderTests
     {
         private INoteForwarder _sut;
-        private Mock<IAllNoteEntriesDataAccessor> _mockDataAccessor;
+        private Mock<INotesDataAccessor> _mockDataAccessor;
 
         [SetUp]
         public void Setup()
         {
-            _mockDataAccessor = new Mock<IAllNoteEntriesDataAccessor>();
+            _mockDataAccessor = new Mock<INotesDataAccessor>();
             _sut = new NoteForwarder(_mockDataAccessor.Object);
         }
 
