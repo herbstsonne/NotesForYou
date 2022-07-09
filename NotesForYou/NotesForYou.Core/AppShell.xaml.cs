@@ -1,6 +1,6 @@
 ﻿using System;
+using NotesForYou.Core.AllEntries;
 using NotesForYou.Core.Login;
-using NotesForYou.Core.Notes;
 using NotesForYou.Core.Settings;
 using Xamarin.Forms;
 
@@ -26,7 +26,7 @@ namespace NotesForYou.Core
 
         private async void OnNotesClicked(object sender, EventArgs e)
         {
-            await NotesForYouNavigation.NavigateTo(new NotesPage());
+            await NotesForYouNavigation.NavigateTo(new EntriesPage());
         }
     }
 }

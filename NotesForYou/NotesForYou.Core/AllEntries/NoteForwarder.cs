@@ -1,17 +1,17 @@
-﻿using NotesForYou.Core.ShowNote;
+﻿using NotesForYou.Core.ShowMessage;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using static NotesForYou.Core.Extension.MessageExtension;
 
-namespace NotesForYou.Core.Notes
+namespace NotesForYou.Core.AllEntries
 {
     public class NoteForwarder : INoteForwarder
     {
-        private readonly INotesDataAccessor _dataAccessor;
+        private readonly IAllNoteEntriesDataAccessor _dataAccessor;
 
-        public NoteForwarder(INotesDataAccessor dataAccessor)
+        public NoteForwarder(IAllNoteEntriesDataAccessor dataAccessor)
         {
             _dataAccessor = dataAccessor;
         }

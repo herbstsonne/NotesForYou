@@ -1,4 +1,4 @@
-﻿using NotesForYou.Core.Notes;
+﻿using NotesForYou.Core.AllEntries;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.Login
@@ -14,7 +14,8 @@ namespace NotesForYou.Core.Login
 
         private async void OnLoginClicked(object obj)
         {
-            await NotesForYouNavigation.NavigateTo(new NotesPage());
+            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+            await Shell.Current.GoToAsync($"//{nameof(EntriesPage)}");
         }
     }
 }

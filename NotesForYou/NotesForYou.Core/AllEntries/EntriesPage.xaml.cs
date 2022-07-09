@@ -1,13 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace NotesForYou.Core.Notes
+namespace NotesForYou.Core.AllEntries
 {
-    public partial class NotesPage : ContentPage
+    public partial class EntriesPage : ContentPage
     {
         NotesViewModel _viewModel;
 
-        public NotesPage()
+        public EntriesPage()
         {
             InitializeComponent();
 

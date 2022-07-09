@@ -1,5 +1,6 @@
-﻿using NotesForYou.Core.ShowNote;
+﻿using NotesForYou.Core.AllEntries;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.Settings
@@ -49,7 +50,7 @@ namespace NotesForYou.Core.Settings
 
             await _dataAccessor.Save(setting);
             await NotesForYouNavigation.NavigateToMainPage();
-            await (NotificationNotifier.ShowNotificationInDefinedTimes?.Invoke()).ConfigureAwait(false);
+            await (SettingsNotifier.ShowNotificationInDefinedTimes?.Invoke()).ConfigureAwait(false);
         }
     }
 }

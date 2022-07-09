@@ -1,23 +1,24 @@
 using System;
 using NotesForYou.Core.Database;
+using NotesForYou.Core.ShowMessage;
 
-namespace NotesForYou.Core.AddNote
+namespace NotesForYou.Core.NewEntries
 {
-    public class AddNoteDataAccessor : IAddNoteDataAccessor
+    public class NewNoteDataAccessor : INewNoteDataAccessor
     {
         private readonly NotesContext _context;
 
-        public AddNoteDataAccessor()
+        public NewNoteDataAccessor()
         {
             _context = (NotesContext)App.ServiceProvider.GetService(typeof(NotesContext));
         }
 
         public bool Validate(string headline, string link, Category category)
         {
-            return !string.IsNullOrWhiteSpace(headline)
-                   && !string.IsNullOrWhiteSpace(link) && (int)category != -1;
+            return !String.IsNullOrWhiteSpace(headline)
+                   && !String.IsNullOrWhiteSpace(link) && (int)category != -1;
         }
-
+        
         public void Save(Note entry)
         {
             try

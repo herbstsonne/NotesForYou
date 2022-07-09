@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NotesForYou.Core.Database;
+using NotesForYou.Core.ShowMessage;
 
-namespace NotesForYou.Core.Notes
+namespace NotesForYou.Core.AllEntries
 {
-    public class NotesDataAccessor : INotesDataAccessor, IDisposable
+    public class AllNoteEntriesDataAccessor : IAllNoteEntriesDataAccessor, IDisposable
     {
         private readonly NotesContext _context;
 
-        public NotesDataAccessor(NotesContext context)
+        public AllNoteEntriesDataAccessor(NotesContext context)
         {
             _context = context;
         }
@@ -19,7 +20,7 @@ namespace NotesForYou.Core.Notes
         public async Task<List<Note>> GetAll()
         {
             var entries = new List<Note>();
-            var items = await _context.Note.Where(x => x.Date != null).ToListAsync();
+            var items = await _context.Note.Where(x => x.Date != null).ToListAsync(); 
             items.Sort((a, b) => DateTime.Compare((DateTime)a.Date, (DateTime)b.Date));
 
             foreach (var item in items)
@@ -41,10 +42,10 @@ namespace NotesForYou.Core.Notes
             _context.Note.Update(note);
             _context.SaveChangesAsync();
         }
-
+        
         public void Dispose()
         {
-            _context.Dispose();
+            //TODO
         }
     }
 }

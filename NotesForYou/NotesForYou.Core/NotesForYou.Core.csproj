@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ShowNote\NotePopupPage.xaml.cs" />
+    <Compile Remove="ShowMessage\NotePopupPage.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +17,7 @@
     <EmbeddedResource Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShowNote\NotePopupPage.xaml.cs">
+    <EmbeddedResource Include="ShowMessage\NotePopupPage.xaml.cs">
       <DependentUpon>NotePopupPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </EmbeddedResource>
@@ -34,12 +34,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AddNote\AddNotePage.xaml.cs">
-      <DependentUpon>AddNotePage.xaml</DependentUpon>
+    <Compile Update="NewEntries\NewEntryPage.xaml.cs">
+      <DependentUpon>NewEntryPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Notes\NotesPage.xaml.cs">
-      <DependentUpon>NotesPage.xaml</DependentUpon>
+    <Compile Update="AllEntries\EntriesPage.xaml.cs">
+      <DependentUpon>EntriesPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Login\LoginPage.xaml.cs">
@@ -49,7 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="ShowNote\NotePopupPage.xaml">
+    <EmbeddedResource Update="ShowMessage\NotePopupPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Settings\SettingsPage.xaml">

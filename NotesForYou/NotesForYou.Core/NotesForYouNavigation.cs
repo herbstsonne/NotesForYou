@@ -1,6 +1,6 @@
-﻿using NotesForYou.Core.AddNote;
+﻿using NotesForYou.Core.AllEntries;
 using NotesForYou.Core.Login;
-using NotesForYou.Core.Notes;
+using NotesForYou.Core.NewEntries;
 using NotesForYou.Core.Settings;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,8 +12,8 @@ namespace NotesForYou.Core
     {
         public static void RegisterRoutes()
         {
-            Routing.RegisterRoute(nameof(NotesPage), typeof(NotesPage));
-            Routing.RegisterRoute(nameof(AddNotePage), typeof(AddNotePage));
+            Routing.RegisterRoute(nameof(EntriesPage), typeof(EntriesPage));
+            Routing.RegisterRoute(nameof(NewEntryPage), typeof(NewEntryPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(SettingsPage), typeof(SettingsPage));
         }

@@ -3,10 +3,9 @@ using Android.Content;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using NotesForYou.Core.AllEntries;
 using NotesForYou.Core.Settings;
 using NotesForYou.Core;
-using NotesForYou.Core.Notes;
-using NotesForYou.Core.ShowNote;
 
 namespace NotesForYou.Droid
 {
@@ -20,8 +19,8 @@ namespace NotesForYou.Droid
         protected override async void OnHandleIntent(Intent intent)
         {
             Console.WriteLine("Starting background work: load random note");
-            NotificationNotifier.ShowNotificationInDefinedTimes = ShowNotificationInDefinedTimes;
-            await NotificationNotifier.ShowNotificationInDefinedTimes.Invoke();
+            SettingsNotifier.ShowNotificationInDefinedTimes = ShowNotificationInDefinedTimes;
+            await SettingsNotifier.ShowNotificationInDefinedTimes.Invoke();
         }
 
         private async Task ShowNotificationInDefinedTimes()

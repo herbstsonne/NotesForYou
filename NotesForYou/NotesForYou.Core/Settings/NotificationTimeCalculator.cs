@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotesForYou.Core.ShowNote
+namespace NotesForYou.Core.Settings
 {
     public static class NotificationTimeCalculator
     {

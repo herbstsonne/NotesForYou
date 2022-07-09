@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NotesForYou.Core.ShowNote
+namespace NotesForYou.Core.ShowMessage
 {
     public class NotificationEventArgs : EventArgs
     {
