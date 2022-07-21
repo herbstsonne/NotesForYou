@@ -1,6 +1,4 @@
-﻿using NotesForYou.Core.AllEntries;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.Settings

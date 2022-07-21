@@ -37,7 +37,8 @@
         
         <CollectionView x:Name="EntriesListView"
                         ItemsSource="{Binding Entries}"
-                        SelectionMode="None">
+                        SelectionMode="None"
+                        IsEnabled="True">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                         <StackLayout Padding="10">
@@ -48,7 +49,7 @@
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemTextStyle}"
                             FontSize="13" />
-                            <Label x:DataType="showMessage:Note">
+                            <Label AutomationId="link" x:DataType="showMessage:Note">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Link}" TextColor="Blue" TextDecorations="Underline">

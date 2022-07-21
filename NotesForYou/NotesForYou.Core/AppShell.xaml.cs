@@ -8,9 +8,13 @@ namespace NotesForYou.Core
 {
     public partial class AppShell : Shell
     {
+        public AppShellViewModel ViewModel { get; set; }
+
         public AppShell()
         {
             InitializeComponent();
+            BindingContext = ViewModel = new AppShellViewModel();
+
             NotesForYouNavigation.RegisterRoutes();
         }
 

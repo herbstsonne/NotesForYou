@@ -36,7 +36,7 @@ namespace NotesForYou.Core
         {
             Shell.Current.FlyoutIsPresented = false;
             var navigation = Shell.Current.Navigation;
-            if (!navigation.NavigationStack.Any())
+            if (!navigation.NavigationStack.Any() || navigation.NavigationStack.FirstOrDefault() == null)
                 return;
             await navigation.PopToRootAsync();
         }
