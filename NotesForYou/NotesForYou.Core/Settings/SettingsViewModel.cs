@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace NotesForYou.Core.Settings
@@ -6,14 +7,17 @@ namespace NotesForYou.Core.Settings
     public class SettingsViewModel : BaseViewModel
     {
         private ISettingsDataAccessor _dataAccessor;
-        private TimeSpan difference;
 
         private TimeSpan _showTime;
 
         public TimeSpan ShowTime
         {
             get => _showTime;
-            set => SetProperty(ref _showTime, value);
+            set
+            { 
+                SetProperty(ref _showTime, value);
+
+            }
         }
 
         public Command LoadCommand { get; }
@@ -30,11 +34,13 @@ namespace NotesForYou.Core.Settings
 
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
+
+            Device.InvokeOnMainThreadAsync(OnLoad);
         }
 
         private async void OnLoad()
         {
-            _showTime = await _dataAccessor.GetShowTime();
+            ShowTime = await _dataAccessor.GetShowTime();
         }
 
         private async void OnCancel()
@@ -44,7 +50,7 @@ namespace NotesForYou.Core.Settings
 
         private async void OnSave()
         {
-            var setting = SettingsFactory.Create(difference, _showTime);
+            var setting = SettingsFactory.Create(_showTime);
 
             await _dataAccessor.Save(setting);
             await NotesForYouNavigation.NavigateToMainPage();

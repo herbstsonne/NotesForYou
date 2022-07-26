@@ -6,10 +6,6 @@
              Shell.PresentationMode="ModalAnimated"
              xmlns:local="clr-namespace:NotesForYou.Core.Settings;assembly=NotesForYou.Core">
     <ContentPage.Content>
-        <RefreshView
-            x:DataType="local:SettingsViewModel"
-            Command="{Binding LoadCommand}"
-            IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <StackLayout Spacing="3" Padding="15">
             <forms:AnimationView
                 x:Name="animationView"
@@ -25,6 +21,5 @@
                 <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
         </StackLayout>
-        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

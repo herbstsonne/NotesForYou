@@ -4,11 +4,10 @@ namespace NotesForYou.Core.Settings
 {
     public class SettingsFactory
     {
-        public static Setting Create(TimeSpan difference, TimeSpan showTime)
+        public static Setting Create(TimeSpan showTime)
         {
             return new Setting
             {
-                Difference = difference,
                 ShowTime = showTime
             };
         }
