@@ -7,7 +7,7 @@ namespace NotesForYou.Core.Database
 {
     public class NotesContext : DbContext
     {
-        public DbSet<Note> Note { get; set; }
+        public virtual DbSet<Note> Note { get; set; }
         public DbSet<Setting> Setting { get; set; }
 
         public NotesContext()

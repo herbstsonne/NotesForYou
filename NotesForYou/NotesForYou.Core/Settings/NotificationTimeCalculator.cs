@@ -4,11 +4,15 @@ namespace NotesForYou.Core.Settings
 {
     public static class NotificationTimeCalculator
     {
-        public static TimeSpan CalculateInitialTimeSpanToShowTime(DateTime showTime)
+        public static TimeSpan CalculateInitialTimeSpanToShowTime(TimeSpan showTime)
         {
-            var difference = showTime.TimeOfDay.Subtract(DateTime.Now.TimeOfDay);
+            var dateTime = DateTime.Today.Add(showTime);
+            Console.WriteLine("Selected time: " + showTime);
+            var difference = dateTime.Subtract(DateTime.Now);
             if (difference.TotalMilliseconds < 0)
-                difference = showTime.AddHours(24).TimeOfDay.Subtract(DateTime.Now.TimeOfDay);
+            {
+                difference = dateTime.AddDays(1).Subtract(DateTime.Now);
+            }
             return difference;
         }
     }

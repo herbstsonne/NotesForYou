@@ -8,11 +8,11 @@ using NotesForYou.Core.ShowMessage;
 
 namespace NotesForYou.Core.AllEntries
 {
-    public class AllNoteEntriesDataAccessor : IAllNoteEntriesDataAccessor, IDisposable
+    public class NotesDataAccessor : INotesDataAccessor, IDisposable
     {
         private readonly NotesContext _context;
 
-        public AllNoteEntriesDataAccessor(NotesContext context)
+        public NotesDataAccessor(NotesContext context)
         {
             _context = context;
         }
@@ -31,12 +31,6 @@ namespace NotesForYou.Core.AllEntries
             return entries;
         }
 
-        public async Task<Note> GetLatestNote()
-        {
-            var latestNote = await _context.Note.FirstOrDefaultAsync(x => x.Date != null);
-            return latestNote;
-        }
-
         public async Task<Note> GetRandomNote()
         {
             return await _context.Note.FirstOrDefaultAsync(x => x.Date == null);
@@ -51,6 +45,7 @@ namespace NotesForYou.Core.AllEntries
         
         public void Dispose()
         {
+            _context.Dispose();
         }
     }
 }

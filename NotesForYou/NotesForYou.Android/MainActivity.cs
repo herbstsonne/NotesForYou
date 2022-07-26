@@ -4,10 +4,11 @@ using Android.Runtime;
 using Android.OS;
 using NotesForYou.Core;
 using Android.Content;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace NotesForYou.Droid
 {
-    [Activity(Label = "NotesForYou", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
+    [Activity(Label = "@string/app_name", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static Xamarin.Forms.Platform.Android.FormsAppCompatActivity Instance { get; private set; }
@@ -20,7 +21,10 @@ namespace NotesForYou.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            var serviceCollection = new ServiceCollection();
+
+            LoadApplication(new App(serviceCollection));
 
             Instance = this;
 

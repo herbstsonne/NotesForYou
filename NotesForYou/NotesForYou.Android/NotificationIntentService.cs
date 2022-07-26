@@ -1,12 +1,11 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Util;
-using NotesForYou.Core;
 using System;
 using System.Threading.Tasks;
-using NotesForYou.Core.Database;
-using NotesForYou.Core.ShowMessage;
 using Xamarin.Forms;
+using NotesForYou.Core.AllEntries;
+using NotesForYou.Core.Settings;
+using NotesForYou.Core;
 
 namespace NotesForYou.Droid
 {
@@ -19,40 +18,52 @@ namespace NotesForYou.Droid
 
         protected override async void OnHandleIntent(Intent intent)
         {
-            string servicename = typeof(NotificationIntentService).Name;
-            Log.Info(servicename, "Starting background work: load random note");
+            Console.WriteLine("Starting background work: load random note");
+            SettingsNotifier.ShowNotificationInDefinedTimes = ShowNotificationInDefinedTimes;
+            await SettingsNotifier.ShowNotificationInDefinedTimes.Invoke();
+        }
 
-            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
+        private async Task ShowNotificationInDefinedTimes()
+        {
+            await WaitForDefinedTime();
+            ShowNotificationEvery24Hours();
+        }
+
+        private async Task WaitForDefinedTime()
+        {
+            try
+            {
+                ISettingsDataAccessor _settingsDataAccessor = (ISettingsDataAccessor)App.ServiceProvider.GetService(typeof(ISettingsDataAccessor));
+                var showTime = await _settingsDataAccessor.GetShowTime();
+                var timeSpan = NotificationTimeCalculator.CalculateInitialTimeSpanToShowTime(showTime);
+
+                await Task.Delay(timeSpan);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(nameof(NotificationIntentService) + ": " + e.Message);
+            }
+        }
+
+        private async void ShowNotificationEvery24Hours()
+        {
+            Console.WriteLine($"Start new timer at: {DateTime.Now}");
+            await ShowFirstNote();
+
+            Device.StartTimer(TimeSpan.FromDays(1), () =>
             {
                 Task.Run(async () =>
                 {
-                    Note note = null;
-                    var dataRetriever = DependencyService.Resolve<INotificationContentRetriever>();
-                    try
-                    {
-                        note = await dataRetriever.SelectNote();
-                        if (note == null)
-                        {
-                            Console.WriteLine("No more new notes available." +
-                                "Add new ones :)");
-                            DependencyService.Get<INotificationManager>().SendNotification("No more new notes available." +
-                                "Add new ones :)", "");
-                        }
-                        else
-                        {
-                            DependencyService.Get<INotificationManager>().SendNotification(note.Headline, note.Link);
-                            intent.PutExtra("Link", note.Link);
-                            intent.PutExtra("Headline", note.Headline);
-                            intent.PutExtra("Category", note.Category);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
+                    await ShowFirstNote();
                 });
                 return true;
             });
+        }
+
+        private async Task ShowFirstNote()
+        {
+            var dataRetriever = (INoteForwarder)App.ServiceProvider.GetService(typeof(INoteForwarder));
+            await dataRetriever.DisplayNotification();
         }
     }
 }

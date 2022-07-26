@@ -15,7 +15,7 @@
                 RepeatMode="Restart"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand" />
-            <TimePicker x:DataType="local:SettingsViewModel" Time="{Binding ShowTime}" />
+            <TimePicker x:Name="_timePicker" x:DataType="local:SettingsViewModel" Time="{Binding ShowTime}" />
             <StackLayout x:DataType="local:SettingsViewModel" Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>

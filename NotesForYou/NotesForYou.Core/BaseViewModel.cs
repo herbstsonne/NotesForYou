@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using NotesForYou.Core.Database;
-using Xamarin.Forms;
 
 namespace NotesForYou.Core
 {
@@ -13,7 +12,7 @@ namespace NotesForYou.Core
 
         public BaseViewModel()
         {
-            _noteContext = DependencyService.Resolve<NotesContext>();
+            _noteContext = (NotesContext)App.ServiceProvider.GetService(typeof(NotesContext));
         }
 
         bool isBusy = false;

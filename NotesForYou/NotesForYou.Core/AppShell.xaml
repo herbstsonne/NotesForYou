@@ -2,7 +2,8 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:allEntries="clr-namespace:NotesForYou.Core.AllEntries;assembly=NotesForYou.Core"
-       xmlns:login="clr-namespace:NotesForYou.Core.Login;assembly=NotesForYou.Core"
+       xmlns:login="clr-namespace:NotesForYou.Core.Login;assembly=NotesForYou.Core" 
+       xmlns:core="clr-namespace:NotesForYou.Core" x:DataType="core:AppShell" 
        Title="NotesForYou.Core"
        x:Class="NotesForYou.Core.AppShell">
 
@@ -66,10 +67,9 @@
         <ShellContent Route="EntriesPage" ContentTemplate="{DataTemplate allEntries:EntriesPage}" />
     </FlyoutItem>
 
-    <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Log out" StyleClass="MenuItemLayoutStyle" Clicked="OnLogoutClicked"></MenuItem>
-    <MenuItem Text="Einstellungen" StyleClass="MenuItemLayoutStyle" Clicked="OnSettingsClicked"></MenuItem>
-    <MenuItem Text="Übersicht" StyleClass="MenuItemLayoutStyle" Clicked="OnNotesClicked"></MenuItem>
+    <MenuItem x:DataType="core:AppShellViewModel" Text="Log out" Command="{Binding ClickLogout}"/>
+    <MenuItem x:DataType="core:AppShellViewModel" Text="Einstellungen" Command="{Binding ClickSettings}"/>
+    <MenuItem x:DataType="core:AppShellViewModel" Text="Übersicht" Command="{Binding ClickOverview}"/>
 
     <TabBar>
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate login:LoginPage}" />

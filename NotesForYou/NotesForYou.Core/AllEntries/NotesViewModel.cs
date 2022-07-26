@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using NotesForYou.Core.Database;
 using NotesForYou.Core.NewEntries;
 using NotesForYou.Core.ShowMessage;
 using Xamarin.Essentials;
@@ -15,7 +12,7 @@ namespace NotesForYou.Core.AllEntries
 {
     public class NotesViewModel : BaseViewModel
     {
-        private readonly AllNoteEntriesDataAccessor _dataAccessor;
+        private readonly INoteForwarder _noteForwarder;
         private Note _selectedItem;
 
         public ObservableCollection<Note> Entries { get; }
@@ -32,9 +29,7 @@ namespace NotesForYou.Core.AllEntries
 
             AddEntryCommand = new Command(OnAddItem);
 
-            var contentRetriever = DependencyService.Resolve<INotificationContentRetriever>();
-
-            _dataAccessor = contentRetriever.DataAccessor;
+            _noteForwarder = (INoteForwarder)App.ServiceProvider.GetService(typeof(INoteForwarder));
         }
 
         private async Task ExecuteClickLinkCommand()
@@ -65,26 +60,9 @@ namespace NotesForYou.Core.AllEntries
         private async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
-
-            try
-            {
-                Entries.Clear();
-                List<Note> currentEntries = await _dataAccessor.GetAll();
-                foreach (var entry in currentEntries)
-                {
-                    Entries.Add(entry);
-                }
-
-                SelectedItem = SelectedItem == null ? currentEntries.FirstOrDefault() : SelectedItem;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            await _noteForwarder.ShowAllEntries(Entries);
+            IsBusy = false;
+            
         }
 
         public Note SelectedItem

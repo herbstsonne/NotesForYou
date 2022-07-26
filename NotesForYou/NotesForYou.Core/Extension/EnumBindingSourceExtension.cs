@@ -4,6 +4,9 @@ using Xamarin.Forms.Xaml;
 
 namespace NotesForYou.Core.Extension
 {
+    /// <summary>
+    /// TODO needed?
+    /// </summary>
     [ContentProperty(nameof(Type))]
     public class EnumBindingSourceExtension : IMarkupExtension
     {

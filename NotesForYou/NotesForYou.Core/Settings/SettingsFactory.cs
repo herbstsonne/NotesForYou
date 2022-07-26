@@ -4,13 +4,12 @@ namespace NotesForYou.Core.Settings
 {
     public class SettingsFactory
     {
-        public static Setting Create(TimeSpan difference, DateTime minDate, DateTime maxDate)
+        public static Setting Create(TimeSpan difference, TimeSpan showTime)
         {
             return new Setting
             {
                 Difference = difference,
-                MinDate = minDate,
-                MaxDate = maxDate
+                ShowTime = showTime
             };
         }
     }
