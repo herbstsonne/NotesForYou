@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NotesForYou.Core.Database;
@@ -27,7 +28,7 @@ namespace NotesForYou.Core.AllEntries
             Title = "Alle bereits angezeigten Nachrichten";
             Entries = new ObservableCollection<Note>();
             LoadEntriesCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            ClickLinkCommand = new Command<string>(async url => await ExecuteClickLinkCommand(url));
+            ClickLinkCommand = new Command(async () => await ExecuteClickLinkCommand());
 
             AddEntryCommand = new Command(OnAddItem);
 
@@ -36,9 +37,29 @@ namespace NotesForYou.Core.AllEntries
             _dataAccessor = contentRetriever.DataAccessor;
         }
 
-        private async Task ExecuteClickLinkCommand(string url)
+        private async Task ExecuteClickLinkCommand()
         {
-            await Launcher.OpenAsync(new System.Uri(url));
+            var note = SelectedItem;
+            if (note == null)
+                return;
+            var usersLink = note.Link;
+            Uri uri;
+            if(usersLink.StartsWith("http"))
+                uri = new System.Uri(usersLink);
+            else if(usersLink.StartsWith("www"))
+            {
+                uri = new Uri("http://" + usersLink);
+            }
+            else
+            {
+                uri = new Uri("https://www.google.com/search?q=" + usersLink);
+            }
+
+            var success = await Launcher.TryOpenAsync(uri);
+            if (!success)
+            {
+                // log and show error
+            }
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -48,11 +69,13 @@ namespace NotesForYou.Core.AllEntries
             try
             {
                 Entries.Clear();
-                var currentEntries = await _dataAccessor.GetAll();
+                List<Note> currentEntries = await _dataAccessor.GetAll();
                 foreach (var entry in currentEntries)
                 {
                     Entries.Add(entry);
                 }
+
+                SelectedItem = SelectedItem == null ? currentEntries.FirstOrDefault() : SelectedItem;
             }
             catch (Exception ex)
             {
@@ -67,16 +90,12 @@ namespace NotesForYou.Core.AllEntries
         public Note SelectedItem
         {
             get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-            }
+            set => _selectedItem = value;
         }
 
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
         }
 
         private async void OnAddItem(object obj)
