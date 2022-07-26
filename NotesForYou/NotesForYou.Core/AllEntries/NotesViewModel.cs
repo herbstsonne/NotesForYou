@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using NotesForYou.Core.NewEntries;
 using NotesForYou.Core.ShowMessage;
@@ -24,16 +25,36 @@ namespace NotesForYou.Core.AllEntries
             Title = "Alle bereits angezeigten Nachrichten";
             Entries = new ObservableCollection<Note>();
             LoadEntriesCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            ClickLinkCommand = new Command<string>(async url => await ExecuteClickLinkCommand(url));
+            ClickLinkCommand = new Command(async () => await ExecuteClickLinkCommand());
 
             AddEntryCommand = new Command(OnAddItem);
 
             _noteForwarder = (INoteForwarder)App.ServiceProvider.GetService(typeof(INoteForwarder));
         }
 
-        private async Task ExecuteClickLinkCommand(string url)
+        private async Task ExecuteClickLinkCommand()
         {
-            await Launcher.OpenAsync(new System.Uri(url));
+            var note = SelectedItem;
+            if (note == null)
+                return;
+            var usersLink = note.Link;
+            Uri uri;
+            if(usersLink.StartsWith("http"))
+                uri = new System.Uri(usersLink);
+            else if(usersLink.StartsWith("www"))
+            {
+                uri = new Uri("http://" + usersLink);
+            }
+            else
+            {
+                uri = new Uri("https://www.google.com/search?q=" + usersLink);
+            }
+
+            var success = await Launcher.TryOpenAsync(uri);
+            if (!success)
+            {
+                // log and show error
+            }
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -47,16 +68,12 @@ namespace NotesForYou.Core.AllEntries
         public Note SelectedItem
         {
             get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-            }
+            set => _selectedItem = value;
         }
 
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
         }
 
         private async void OnAddItem(object obj)
