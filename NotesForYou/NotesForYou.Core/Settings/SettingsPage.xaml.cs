@@ -17,15 +17,5 @@ namespace NotesForYou.Core.Settings
 
             BindingContext = new SettingsViewModel();
         }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            Task.Run(async () =>
-            {
-                //await Navigation.PopToRootAsync();
-                await Shell.Current.GoToAsync($"//{nameof(EntriesPage)}");
-            });
-        }
     }
 }

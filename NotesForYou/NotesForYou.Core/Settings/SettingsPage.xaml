@@ -6,6 +6,10 @@
              Shell.PresentationMode="ModalAnimated"
              xmlns:local="clr-namespace:NotesForYou.Core.Settings;assembly=NotesForYou.Core">
     <ContentPage.Content>
+        <RefreshView
+            x:DataType="local:SettingsViewModel"
+            Command="{Binding LoadCommand}"
+            IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <StackLayout Spacing="3" Padding="15">
             <forms:AnimationView
                 x:Name="animationView"
@@ -15,11 +19,12 @@
                 RepeatMode="Restart"
                 VerticalOptions="FillAndExpand"
                 HorizontalOptions="FillAndExpand" />
-            <TimePicker x:Name="_timePicker" x:DataType="local:SettingsViewModel" Time="{Binding ShowTime}" />
+            <TimePicker x:Name="_timePicker" x:DataType="local:SettingsViewModel" Time="{Binding ShowTime, Mode=TwoWay}" />
             <StackLayout x:DataType="local:SettingsViewModel" Orientation="Horizontal">
                 <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
                 <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
             </StackLayout>
         </StackLayout>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

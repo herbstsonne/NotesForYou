@@ -16,6 +16,7 @@ namespace NotesForYou.Core.Settings
             set => SetProperty(ref _showTime, value);
         }
 
+        public Command LoadCommand { get; }
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
 
@@ -23,18 +24,17 @@ namespace NotesForYou.Core.Settings
         {
             _dataAccessor = (ISettingsDataAccessor)App.ServiceProvider.GetService(typeof(ISettingsDataAccessor));
 
+            LoadCommand = new Command(OnLoad);
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
 
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
+        }
 
-            Device.InvokeOnMainThreadAsync(async () =>
-            {
-                _showTime = await _dataAccessor.GetShowTime();
-            }
-            );
-            difference = new TimeSpan(0, 0, 15);
+        private async void OnLoad()
+        {
+            _showTime = await _dataAccessor.GetShowTime();
         }
 
         private async void OnCancel()
