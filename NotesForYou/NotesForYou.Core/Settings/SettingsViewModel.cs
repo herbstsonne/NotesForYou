@@ -13,11 +13,7 @@ namespace NotesForYou.Core.Settings
         public TimeSpan ShowTime
         {
             get => _showTime;
-            set
-            { 
-                SetProperty(ref _showTime, value);
-
-            }
+            set => SetProperty(ref _showTime, value);
         }
 
         public Command LoadCommand { get; }

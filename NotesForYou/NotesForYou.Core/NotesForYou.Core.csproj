@@ -34,11 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="NewEntries\NewEntryPage.xaml.cs">
+    <Compile Update="NewNotes\NewEntryPage.xaml.cs">
       <DependentUpon>NewEntryPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="AllEntries\EntriesPage.xaml.cs">
+    <Compile Update="Notes\EntriesPage.xaml.cs">
       <DependentUpon>EntriesPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
