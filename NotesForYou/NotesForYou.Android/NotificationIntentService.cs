@@ -2,7 +2,6 @@
 using Android.Content;
 using System;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using NotesForYou.Core.AllEntries;
 using NotesForYou.Core.Settings;
 using NotesForYou.Core;

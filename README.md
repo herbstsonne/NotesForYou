@@ -8,3 +8,8 @@ It is possible to set a time when a note should be sent by a background service 
 After an entry was sent one can find it in a list that contains all already sent entries.
 
 Currently it only works on Android.
+
+
+![Overview](Overview.png)
+![Add new note](AddNewNote.png)
+![Set time for notification](.png)
