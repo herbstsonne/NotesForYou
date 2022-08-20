@@ -12,4 +12,4 @@ Currently it only works on Android.
 
 ![Overview](Overview.png)
 ![Add new note](AddNewNote.png)
-![Set time for notification](.png)
+![Set time for notification](SetTime.png)
