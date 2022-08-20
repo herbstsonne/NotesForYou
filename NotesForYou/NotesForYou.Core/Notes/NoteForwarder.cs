@@ -57,15 +57,15 @@ namespace NotesForYou.Core.AllEntries
             }
         }
 
-        public async Task ShowAllEntries(ObservableCollection<Note> entries)
+        public async Task ShowAllNotes(ObservableCollection<Note> notes)
         {
             try
             {
-                entries.Clear();
-                var currentEntries = await _dataAccessor.GetAll();
-                foreach (var entry in currentEntries)
+                notes.Clear();
+                var dbNotes = await _dataAccessor.GetAll();
+                foreach (var dbNote in dbNotes)
                 {
-                    entries.Add(entry);
+                    notes.Add(dbNote);
                 }
             }
             catch (Exception ex)

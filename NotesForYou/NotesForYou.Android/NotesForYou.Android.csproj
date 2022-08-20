@@ -92,6 +92,12 @@
     <AndroidAsset Include="Assets\52103-love.json" />
     <AndroidAsset Include="Assets\65117-love-letter.json" />
     <AndroidAsset Include="Assets\8856-love.json" />
+    <AndroidAsset Include="Assets\overview.json" />
+    <AndroidAsset Include="Assets\writenote.json" />
+    <AndroidAsset Include="Assets\settings.json" />
+    <AndroidAsset Include="Assets\note.json" />
+    <AndroidAsset Include="Assets\notekitty.json" />
+    <AndroidAsset Include="Assets\writingpencil.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />

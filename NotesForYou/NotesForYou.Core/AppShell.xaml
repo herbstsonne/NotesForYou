@@ -63,13 +63,13 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Your entries" Icon="icon_feed.png">
+    <FlyoutItem Title="Your notes" Icon="icon_feed.png">
         <ShellContent Route="EntriesPage" ContentTemplate="{DataTemplate allEntries:EntriesPage}" />
     </FlyoutItem>
 
     <MenuItem x:DataType="core:AppShellViewModel" Text="Log out" Command="{Binding ClickLogout}"/>
-    <MenuItem x:DataType="core:AppShellViewModel" Text="Einstellungen" Command="{Binding ClickSettings}"/>
-    <MenuItem x:DataType="core:AppShellViewModel" Text="Übersicht" Command="{Binding ClickOverview}"/>
+    <MenuItem x:DataType="core:AppShellViewModel" Text="Settings" Command="{Binding ClickSettings}"/>
+    <MenuItem x:DataType="core:AppShellViewModel" Text="Overview" Command="{Binding ClickOverview}"/>
 
     <TabBar>
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate login:LoginPage}" />

@@ -17,7 +17,7 @@
 
             <forms:AnimationView
                 x:Name="animationView"
-                Animation="8856-love.json"
+                Animation="writingpencil.json"
                 AnimationSource="AssetOrBundle"
                 RepeatCount="3"
                 RepeatMode="Restart"

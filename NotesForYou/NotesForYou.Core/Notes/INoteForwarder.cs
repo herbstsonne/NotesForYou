@@ -8,6 +8,6 @@ namespace NotesForYou.Core.AllEntries
     {
         Task<Note> GetUpdatedNote();
         Task DisplayNotification();
-        Task ShowAllEntries(ObservableCollection<Note> entries);
+        Task ShowAllNotes(ObservableCollection<Note> entries);
     }
 }

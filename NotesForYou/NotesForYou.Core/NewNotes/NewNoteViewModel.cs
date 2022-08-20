@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NotesForYou.Core.ShowMessage;
 using Xamarin.Forms;
 
@@ -58,19 +57,15 @@ namespace NotesForYou.Core.NewEntries
 
         private async void OnCancel()
         {
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+            await NotesForYouNavigation.NavigateToMainPage();
         }
 
         private async void OnSave()
         {
             var note = NoteEntryFactory.Create((int)SelectedCategory, Headline, Link);
-
             _newEntryhandler.Save(note);
 
-            if(Shell.Current == null)
-                return;
-            await Shell.Current.GoToAsync("..");
+            await NotesForYouNavigation.NavigateToMainPage();
         }
     }
 }

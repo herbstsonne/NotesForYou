@@ -20,7 +20,7 @@ namespace NotesForYou.Droid
         {
             Console.WriteLine("Starting background work: load random note");
             SettingsNotifier.ShowNotificationInDefinedTimes = ShowNotificationInDefinedTimes;
-            await SettingsNotifier.ShowNotificationInDefinedTimes.Invoke();
+            await ShowNotificationInDefinedTimes();
         }
 
         private async Task ShowNotificationInDefinedTimes()
@@ -48,7 +48,6 @@ namespace NotesForYou.Droid
         private async void ShowNotificationEvery24Hours()
         {
             Console.WriteLine($"Start new timer at: {DateTime.Now}");
-            await ShowFirstNote();
 
             Device.StartTimer(TimeSpan.FromDays(1), () =>
             {

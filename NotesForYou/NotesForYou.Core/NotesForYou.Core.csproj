@@ -10,13 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="ShowMessage\NotePopupPage.xaml.cs">
       <DependentUpon>NotePopupPage.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -11,8 +11,6 @@ namespace NotesForYou.Droid
     [Activity(Label = "@string/app_name", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        public static Xamarin.Forms.Platform.Android.FormsAppCompatActivity Instance { get; private set; }
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -25,8 +23,6 @@ namespace NotesForYou.Droid
             var serviceCollection = new ServiceCollection();
 
             LoadApplication(new App(serviceCollection));
-
-            Instance = this;
 
             var notificationIntent = new Intent(this, typeof(NotificationIntentService));
 

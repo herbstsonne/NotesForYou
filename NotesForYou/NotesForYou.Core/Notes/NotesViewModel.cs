@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using NotesForYou.Core.NewEntries;
 using NotesForYou.Core.ShowMessage;
@@ -22,7 +20,6 @@ namespace NotesForYou.Core.AllEntries
 
         public NotesViewModel()
         {
-            Title = "Alle bereits angezeigten Nachrichten";
             Entries = new ObservableCollection<Note>();
             LoadEntriesCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ClickLinkCommand = new Command(async () => await ExecuteClickLinkCommand());
@@ -40,7 +37,7 @@ namespace NotesForYou.Core.AllEntries
             var usersLink = note.Link;
             Uri uri;
             if(usersLink.StartsWith("http"))
-                uri = new System.Uri(usersLink);
+                uri = new Uri(usersLink);
             else if(usersLink.StartsWith("www"))
             {
                 uri = new Uri("http://" + usersLink);
@@ -53,14 +50,14 @@ namespace NotesForYou.Core.AllEntries
             var success = await Launcher.TryOpenAsync(uri);
             if (!success)
             {
-                // log and show error
+                Console.WriteLine($"Could not open link: {uri}");
             }
         }
 
         private async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
-            await _noteForwarder.ShowAllEntries(Entries);
+            await _noteForwarder.ShowAllNotes(Entries);
             IsBusy = false;
             
         }
@@ -78,7 +75,7 @@ namespace NotesForYou.Core.AllEntries
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewEntryPage));
+            await NotesForYouNavigation.NavigateTo(new NewEntryPage());
         }
     }
 }

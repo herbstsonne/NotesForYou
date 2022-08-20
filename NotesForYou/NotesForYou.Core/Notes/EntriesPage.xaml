@@ -6,7 +6,6 @@
              xmlns:notesForYou="clr-namespace:NotesForYou.Core;assembly=NotesForYou.Core"
              xmlns:showMessage="clr-namespace:NotesForYou.Core.ShowMessage;assembly=NotesForYou.Core"
              x:Class="NotesForYou.Core.AllEntries.EntriesPage"
-             Title="{Binding Title}"
              x:Name="BrowseItemsPage"
              Routing.Route="EntriesPage">
 
@@ -23,7 +22,7 @@
         <forms:AnimationView
             Grid.Row="0"
             x:Name="animationView"
-            Animation="49157-love-letter.json"
+            Animation="overview.json"
             AnimationSource="AssetOrBundle"
             RepeatCount="3"
             RepeatMode="Restart"
@@ -42,7 +41,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                         <StackLayout Padding="10">
-                            <Label x:DataType="showMessage:Note" Text="{Binding Date, StringFormat='{0:dd. MMMM yyyy}'}" 
+                            <Label x:DataType="showMessage:Note" Text="{Binding Date, StringFormat='{0:dddd, MMMM d, yyyy}'}" 
                             LineBreakMode="NoWrap" 
                             FontSize="16" />
                             <Label x:DataType="showMessage:Note" Text="{Binding Headline}" 

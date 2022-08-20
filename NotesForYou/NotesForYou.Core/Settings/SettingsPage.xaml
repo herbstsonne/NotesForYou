@@ -9,7 +9,7 @@
         <StackLayout Spacing="3" Padding="15">
             <forms:AnimationView
                 x:Name="animationView"
-                Animation="52103-love.json"
+                Animation="settings.json"
                 AnimationSource="AssetOrBundle"
                 RepeatCount="3"
                 RepeatMode="Restart"
