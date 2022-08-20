@@ -49,14 +49,14 @@ namespace NotesForYou.Droid
         private async void ShowNotificationEvery24Hours(TimeSpan waitingTime)
         {
             Console.WriteLine($"Start new timer at: {DateTime.Now}");
-            var timer = new Timer(ShowFirstNote, SettingsNotifier.ResetEvent, waitingTime, TimeSpan.FromMinutes(1));
+            var timer = new Timer(ShowFirstNote, SettingsNotifier.ResetEvent, waitingTime, TimeSpan.FromDays(1));
             
             while(true)
             {
                 SettingsNotifier.ResetEvent.WaitOne();
                 waitingTime = await WaitForDefinedTime();
 
-                timer.Change(waitingTime, TimeSpan.FromMinutes(1));
+                timer.Change(waitingTime, TimeSpan.FromDays(1));
             };
         }
 
