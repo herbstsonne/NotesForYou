@@ -5,6 +5,7 @@ using Android.OS;
 using NotesForYou.Core;
 using Android.Content;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace NotesForYou.Droid
 {
@@ -24,6 +25,12 @@ namespace NotesForYou.Droid
 
             LoadApplication(new App(serviceCollection));
 
+            ActivityManager activityManager = GetSystemService(Context.ActivityService) as ActivityManager;
+       
+            var isRunning = activityManager.GetRunningServices(int.MaxValue).Any(s => s.Service.ClassName.Contains(nameof(NotificationIntentService)));
+
+            if (isRunning)
+                return;
             var notificationIntent = new Intent(this, typeof(NotificationIntentService));
 
             StartService(notificationIntent);

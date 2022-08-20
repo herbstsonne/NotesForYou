@@ -35,7 +35,7 @@ namespace NotesForYou.Core.Settings
 
         private async void OnLoad()
         {
-            ShowTime = await _dataAccessor.GetShowTime();
+            ShowTime = await _dataAccessor.GetShowTime(); 
         }
 
         private async void OnCancel()
@@ -49,7 +49,7 @@ namespace NotesForYou.Core.Settings
 
             await _dataAccessor.Save(setting);
             await NotesForYouNavigation.NavigateToMainPage();
-            await (SettingsNotifier.ShowNotificationInDefinedTimes?.Invoke()).ConfigureAwait(false);
+            SettingsNotifier.ResetEvent.Set();
         }
     }
 }
