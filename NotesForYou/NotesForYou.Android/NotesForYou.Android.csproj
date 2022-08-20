@@ -87,11 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\49157-love-letter.json" />
-    <AndroidAsset Include="Assets\81924-love-letter.json" />
-    <AndroidAsset Include="Assets\52103-love.json" />
-    <AndroidAsset Include="Assets\65117-love-letter.json" />
-    <AndroidAsset Include="Assets\8856-love.json" />
     <AndroidAsset Include="Assets\overview.json" />
     <AndroidAsset Include="Assets\writenote.json" />
     <AndroidAsset Include="Assets\settings.json" />

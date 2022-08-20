@@ -3,7 +3,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using static NotesForYou.Core.Extension.MessageExtension;
 
 namespace NotesForYou.Core.AllEntries
 {
@@ -23,7 +22,7 @@ namespace NotesForYou.Core.AllEntries
                 var note = await _dataAccessor.GetRandomNote();
                 if (note == null)
                 {
-                    Console.WriteLine(new Note().GetNoteNotAvailableText());
+                    Console.WriteLine(InfoMessageHandler.GetNoteNotAvailableText());
                     return null;
                 }
 
@@ -44,7 +43,7 @@ namespace NotesForYou.Core.AllEntries
                 var note = await GetUpdatedNote();
                 if (note == null)
                 {
-                    DependencyService.Get<INotificationManager>().SendNotification(new Note().GetNoteNotAvailableText(), "");
+                    DependencyService.Get<INotificationManager>().SendNotification(InfoMessageHandler.GetNoteNotAvailableText(), "");
                 }
                 else
                 {
